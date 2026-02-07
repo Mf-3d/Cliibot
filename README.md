@@ -3,7 +3,7 @@
 > [!NOTE]
 > 紹介されている要素は最終リリース前に変更される可能性があります。
 
-![Logo of Clii with text](.github\assets\image\logo-with-text.png)
+![Logo of Clii with text](.github/assets/image/logo-with-text.png)
 
 [LiquidClii](https://github.com/Mf-3d/LiquidClii) の後継となる、Discordボットです。
 

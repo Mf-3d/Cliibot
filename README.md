@@ -15,7 +15,7 @@
 
 ## ℹ️ 関連
 
-- [LiquidClii](https://github.com/Mf-3d/LiquidClii) — Cliibotの前身。
+- [**LiquidClii**](https://github.com/Mf-3d/LiquidClii) — Cliibotの前身。
   - LiquidClii
   - LiquidClii V2
   - LiquidClii #

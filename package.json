@@ -1,0 +1,22 @@
+{
+  "name": "cliibot",
+  "version": "0.1.0",
+  "description": "It could be a robot.",
+  "homepage": "https://github.com/Mf-3d/Cliibot#readme",
+  "bugs": {
+    "url": "https://github.com/Mf-3d/Cliibot/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mf-3d/Cliibot.git"
+  },
+  "license": "MIT",
+  "author": "mf7cli",
+  "main": "src/main.js",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

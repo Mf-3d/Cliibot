@@ -1,8 +1,8 @@
-import chalk from "chalk";
 import { Client } from "discord.js";
+import { logger } from "../utils/logger";
 
 export function registerReadyEvent(client: Client) {
   client.once("ready", () => {
-    console.info(`🪵  Logged in as: ${chalk.bold(client.user?.tag)}`);
+    logger.info(`🪵  Logged in as: ${client.user?.tag}`);
   });
 }

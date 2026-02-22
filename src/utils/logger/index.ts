@@ -3,8 +3,8 @@ import { LOG_LEVEL_PRIORITY, LogLevel } from "./levels";
 import { normalize, NormalizedLog } from "./normalize";
 
 type LogOptions = {
-  emoji: string;
-  fileOnly: string;
+  emoji?: string;
+  fileOnly?: string;
 };
 
 let currentLogLevel: LogLevel = "info";
@@ -35,12 +35,12 @@ function shouldLog(level: LogLevel): boolean {
 function output(level: LogLevel, normalized: NormalizedLog, options?: LogOptions) {
   if (!shouldLog(level)) return;
   
-  const formatted = format(level, normalized.message);
+  const formatted = format(level, normalized.message, options?.emoji);
 
   if (normalized.stack) console.error(normalized.stack);
 
   writeToConsole(level, formatted);
-  // writeToFile(level, formatted);
+  // writeToFile(level);
 }
 
 function writeToConsole(level: LogLevel, text: string) {

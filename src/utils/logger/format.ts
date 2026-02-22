@@ -1,9 +1,10 @@
 import chalk from "chalk";
 import { LogLevel } from "./levels";
 
-export function format(level: LogLevel, message: string) {
+export function format(level: LogLevel, message: string, emoji?: string) {
   const time = new Date().toISOString();
-  return `[${time}] [${level.toUpperCase()}] ${message}`; // e.g. "[] [INFO] Hello, nice to meet you!"
+  let prefix = emoji ? `${emoji} ` : "";
+  return `[${time}] [${level.toUpperCase()}] ${prefix}${message}`; // e.g. "[] [INFO] Hello, nice to meet you!"
 }
 
 // 色を付ける

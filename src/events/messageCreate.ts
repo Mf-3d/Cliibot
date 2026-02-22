@@ -5,9 +5,9 @@ export function registerMessageCreateEvent(client: Client) {
   client.on("messageCreate", (message) => {
     if (message.author.bot) return;
 
-    logger.info(
-      `💬 Message from ${message.author.tag}: ${message.content}`
-    );
+    logger.info(`Message from ${message.author.tag}: ${message.content}`, {
+      emoji: "💬"
+    });
 
     if (message.content === "ping") {
       message.reply("pong!");

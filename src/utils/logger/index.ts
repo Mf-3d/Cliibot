@@ -1,14 +1,7 @@
-import chalk from "chalk";
 import { LOG_LEVEL_PRIORITY, LogLevel } from "./levels";
-
-type NormalizedLog = {
-  message: string;
-  stack?: string
-};
-
-interface Writer {
-  write(level: LogLevel, text: string, prefix?: string): void;
-}
+import { Formatter } from "./formatter";
+import { Writer, ConsoleWriter } from "./writer";
+import { NormalizedLog, Normalizer } from "./normalizer";
 
 export class Logger {
   private currentLogLevel: LogLevel = "info";
@@ -55,59 +48,5 @@ export class Logger {
 
   error (message: string | Error) {
     this.output("info", this.normalizer.normalize(message));;
-  }
-}
-
-class Normalizer {
-  normalize(err: Error | string): NormalizedLog {
-    if (err instanceof Error) {
-      return {
-        message: err.message,
-        stack: err.stack,
-      }
-    } else {
-      return {
-        message: err,
-      }
-    }
-  }
-}
-
-class Formatter {
-  format(level: LogLevel, message: string): string {
-    const time = new Date().toISOString();
-    return [
-      `[${time}]`,
-      `[${level.toUpperCase()}]`,
-      message
-    ].join(" "); // e.g. "[] [INFO] Hello, nice to meet you!"
-  }
-}
-
-class ConsoleWriter implements Writer {
-  write(level: LogLevel, text: string) {
-    const colored = this.colorize(level, text);
-  
-    if (level === "error") {
-      console.error(colored);
-    } else if (level === "warn") {
-      console.warn(colored);
-    } else {
-      console.log(colored);
-    }
-  }
-
-  // 色を付ける
-  private colorize(level: LogLevel, text: string) {
-    switch (level) {
-      case "info":
-        return chalk.blue(text);
-      case "warn":
-        return chalk.yellow.bold(text);
-      case "error":
-        return chalk.red.bold(text);
-      default:
-        return chalk.gray(text);
-    }
   }
 }

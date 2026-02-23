@@ -33,7 +33,7 @@ const commands = [
 ];
 
 registerInteractionEvent(client, commands);
-registerReadyEvent(client, commands, logger);
+registerReadyEvent(client, logger, commands, config);
 registerMessageCreateEvent(client, logger);
 
 client.login(process.env.DISCORD_TOKEN);

@@ -50,6 +50,6 @@ export class Logger {
   }
 
   error (message: string | Error) {
-    this.output("info", this.normalizer.normalize(message));;
+    this.output("error", this.normalizer.normalize(message));;
   }
 }

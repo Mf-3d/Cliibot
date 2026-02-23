@@ -1,16 +1,17 @@
 import { Client } from "discord.js";
 import { Logger } from "../utils/logger/";
-import { Command } from "src/commands/Command";
+import { registerCommands } from "../../src/infrastructure/discord/registerCommands";
+import { Command } from "../../src/commands/Command";
+import { EnvConfig } from "../../src/config/env";
 
-export function registerReadyEvent(client: Client, commands: Command[], logger: Logger) {
+export function registerReadyEvent(
+  client: Client,
+  logger: Logger,commands: Command[],
+  config: EnvConfig
+) {
   client.once("ready", async () => {
     logger.info(`🪵 Logged in as: ${client.user?.tag}`);
 
-    const slashCommands = commands.map(c => ({
-      name: c.name,
-      description: c.description ?? "No description",
-    }));
-
-    await client.application?.commands.set(slashCommands);
+    registerCommands(commands, config);
   });
 }

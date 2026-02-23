@@ -1,5 +1,4 @@
-import "dotenv/config";
-
+import { config } from "./config/env";
 import { createClient } from "./infrastructure/discord/client";
 import { registerReadyEvent } from "./events/ready";
 import { registerMessageCreateEvent } from "./events/messageCreate";

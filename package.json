@@ -30,7 +30,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "dev": "ts-node ."
+    "build": "npm install && tsc -p ./tsconfig.json && tsc-alias -p tsconfig.json",
+    "start": "node ./dist/main",
+    "dev": "ts-node -r tsconfig-paths/register ./src/main"
   }
 }

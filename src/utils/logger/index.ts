@@ -37,7 +37,7 @@ export class Logger {
   private output (level: LogLevel, normalized: NormalizedLog) {
     if (!this.shouldLog(level)) return;
 
-    const formatted = this.formatter.format(level, normalized.message);
+    const formatted = this.formatter.format(level, normalized.stack ?? normalized.message);
     this.writers.forEach(writer => writer.write(level, formatted));
   }
 

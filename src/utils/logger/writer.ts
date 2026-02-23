@@ -1,9 +1,12 @@
+import fs from "node:fs";
+import path from "node:path";
 import chalk from "chalk";
+import stripAnsi from "strip-ansi";
 
 import { LogLevel } from "./levels";
 
 export interface Writer {
-  write(level: LogLevel, text: string, prefix?: string): void;
+  write(level: LogLevel, text: string): void;
 }
 
 export class ConsoleWriter implements Writer {
@@ -31,5 +34,25 @@ export class ConsoleWriter implements Writer {
       default:
         return chalk.gray(text);
     }
+  }
+}
+
+export class FileWriter implements Writer {
+  private filePath: string;
+
+  constructor() {
+    this.filePath = path.join("logs", "app.log");
+  }
+
+  write(_level: LogLevel, text: string): void {
+    const plain = stripAnsi(text);
+
+    const dir = path.dirname(this.filePath);
+
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+
+    fs.appendFileSync(this.filePath, `${plain}\n`);
   }
 }

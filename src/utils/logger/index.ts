@@ -1,6 +1,6 @@
 import { LOG_LEVEL_PRIORITY, LogLevel } from "./levels";
 import { Formatter } from "./formatter";
-import { Writer, ConsoleWriter } from "./writer";
+import { Writer, ConsoleWriter, FileWriter } from "./writer";
 import { NormalizedLog, Normalizer } from "./normalizer";
 
 export class Logger {
@@ -12,7 +12,10 @@ export class Logger {
   constructor () {
     this.normalizer = new Normalizer();
     this.formatter = new Formatter();
-    this.writers = [ new ConsoleWriter() ];
+    this.writers = [
+      new ConsoleWriter(),
+      new FileWriter()
+    ];
   }
 
   setLogLevel(level: LogLevel) {

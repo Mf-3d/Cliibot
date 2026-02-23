@@ -7,8 +7,8 @@ import { registerInteractionEvent } from "./events/interactionCreate";
 import { Logger } from "./utils/logger";
 import { DiscordAdapter } from "./infrastructure/discord/adapter";
 import { AboutCommand } from "./features/about/command";
-import { AboutUseCase } from "./features/about/service";
-import { PingUseCase } from "./features/ping/service";
+import { AboutUseCase } from "./features/about/usecase";
+import { PingUseCase } from "./features/ping/usecase";
 import { PingCommand } from "./features/ping/command";
 import { DiscordBotInfoRepository } from "./features/about/discordBotInfoRepository";
 

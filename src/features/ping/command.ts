@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction } from "discord.js";
-import { Command } from "../../commands/Command";
+import { Command } from "@/commands/Command";
 import { PingUseCase } from "./usecase";
 import { DiscordAdapter } from "src/infrastructure/discord/adapter";
 

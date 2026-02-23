@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction } from "discord.js";
-import { Command } from "../../commands/Command";
+import { Command } from "@/commands/Command";
 import { AboutUseCase } from "./usecase";
 import { formatBotInfo, toEmbed } from "./format";
 

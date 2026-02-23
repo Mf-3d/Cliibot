@@ -1,5 +1,5 @@
 import { Client } from "discord.js";
-import { Logger } from "../../../src/utils/logger/";
+import { Logger } from "@/utils/logger/";
 export class DiscordAdapter {
   private readonly client: Client;
   private readonly logger: Logger;

@@ -1,6 +1,6 @@
 import { REST, Routes } from "discord.js";
-import { Command } from "../../../src/commands/Command";
-import { EnvConfig } from "../../../src/config/env";
+import { Command } from "@/commands/Command";
+import { EnvConfig } from "@/config/env";
 
 export async function registerCommands(
   commands: Command[],

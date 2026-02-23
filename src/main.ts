@@ -1,16 +1,17 @@
-import { config } from "./config/env";
-import { createClient } from "./infrastructure/discord/client";
-import { registerReadyEvent } from "./events/ready";
-import { registerMessageCreateEvent } from "./events/messageCreate";
-import { registerInteractionEvent } from "./events/interactionCreate";
-import { Logger } from "./utils/logger";
-import { DiscordAdapter } from "./infrastructure/discord/adapter";
-import { AboutCommand } from "./features/about/command";
-import { AboutUseCase } from "./features/about/usecase";
-import { PingUseCase } from "./features/ping/usecase";
-import { PingCommand } from "./features/ping/command";
-import { DiscordBotInfoRepository } from "./features/about/discordBotInfoRepository";
+import { config } from "@/config/env";
+import { createClient } from "@/infrastructure/discord/client";
+import { registerReadyEvent } from "@/events/ready";
+import { registerMessageCreateEvent } from "@/events/messageCreate";
+import { registerInteractionEvent } from "@/events/interactionCreate";
+import { Logger } from "@/utils/logger";
+import { DiscordAdapter } from "@/infrastructure/discord/adapter";
+import { AboutCommand } from "@/features/about/command";
+import { AboutUseCase } from "@/features/about/usecase";
+import { PingUseCase } from "@/features/ping/usecase";
+import { PingCommand } from "@/features/ping/command";
+import { DiscordBotInfoRepository } from "@/features/about/discordBotInfoRepository";
 
+// ロガーを生成
 const logger = new Logger();
 logger.setLogLevel("info");
 

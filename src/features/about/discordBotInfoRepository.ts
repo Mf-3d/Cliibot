@@ -1,6 +1,6 @@
 import { DiscordAdapter } from "src/infrastructure/discord/adapter";
 import { BotInfoRepository } from "./botInfoRepository";
-import pkg from "../../../package.json";
+import pkg from "@/../package.json";
 
 export class DiscordBotInfoRepository implements BotInfoRepository {
   constructor(private readonly discordAdapter: DiscordAdapter) {}

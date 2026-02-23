@@ -1,21 +1,16 @@
-import { DiscordAdapter } from "../../../src/infrastructure/discord/adapter";
-import pkg from "../../../package.json";
 import { BotInfo } from "./types";
+import { BotInfoRepository } from "./botInfoRepository";
 
 export class AboutUseCase {
-  private readonly discordAdapter;
-  
-  constructor (discordAdapter: DiscordAdapter) {
-    this.discordAdapter = discordAdapter;
-  }
+  constructor (private readonly repository: BotInfoRepository) {}
 
   getBotInfo(): BotInfo {
     return {
       name: process.env.BOT_NAME ?? "UNNAMED BOT",
-      usertag: this.discordAdapter.getBotUsertag(),
-      version: pkg.version,
-      author: pkg.author,
-      avatarUrl: this.discordAdapter.getBotAvatarUrl(),
+      usertag: this.repository.getUsertag(),
+      version: this.repository.getVersion(),
+      author: this.repository.getAuthor(),
+      avatarUrl: this.repository.getAvatarUrl(),
       uptime: Math.floor(process.uptime())
     };
   }

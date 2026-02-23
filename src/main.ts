@@ -10,6 +10,7 @@ import { AboutCommand } from "./features/about/command";
 import { AboutUseCase } from "./features/about/service";
 import { PingUseCase } from "./features/ping/service";
 import { PingCommand } from "./features/ping/command";
+import { DiscordBotInfoRepository } from "./features/about/discordBotInfoRepository";
 
 const logger = new Logger();
 logger.setLogLevel("info");
@@ -20,7 +21,8 @@ const client = createClient();
 const discordAdapter = new DiscordAdapter(client, logger);
 
 // コマンド
-const aboutUseCase = new AboutUseCase(discordAdapter);
+const botInfoRepository = new DiscordBotInfoRepository(discordAdapter);
+const aboutUseCase = new AboutUseCase(botInfoRepository);
 const aboutCommand = new AboutCommand(aboutUseCase);
 
 const pingUseCase = new PingUseCase();

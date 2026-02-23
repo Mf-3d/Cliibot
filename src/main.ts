@@ -14,6 +14,14 @@ import { DiscordBotInfoRepository } from "./features/about/discordBotInfoReposit
 const logger = new Logger();
 logger.setLogLevel("info");
 
+process.on("unhandledRejection", (reason, _promise) => {
+  logger.error(`[Unhandled Rejection] ${reason}`);
+});
+
+process.on("uncaughtException", (err) => {
+  logger.error(`[Uncaught Exception] ${err}`);
+});
+
 const client = createClient();
 
 // アダプター

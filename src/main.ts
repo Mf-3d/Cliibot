@@ -8,6 +8,8 @@ import { Logger } from "./utils/logger";
 import { DiscordAdapter } from "./infrastructure/discord/adapter";
 import { AboutCommand } from "./features/about/command";
 import { AboutUseCase } from "./features/about/service";
+import { PingUseCase } from "./features/ping/service";
+import { PingCommand } from "./features/ping/command";
 
 const logger = new Logger();
 logger.setLogLevel("info");
@@ -21,8 +23,12 @@ const discordAdapter = new DiscordAdapter(client, logger);
 const aboutUseCase = new AboutUseCase(discordAdapter);
 const aboutCommand = new AboutCommand(aboutUseCase);
 
+const pingUseCase = new PingUseCase();
+const pingCommand = new PingCommand(pingUseCase, discordAdapter);
+
 const commands = [
-  aboutCommand
+  aboutCommand,
+  pingCommand
 ];
 
 registerInteractionEvent(client, commands);

@@ -9,6 +9,10 @@ export class DiscordAdapter {
     this.logger = logger;
   }
 
+  getWebSocketPing(): number {
+    return this.client.ws.ping;
+  }
+
   getBotAvatarUrl() {
     if (!this.client.user) {
       const err = new Error("Client is not ready.");
@@ -16,7 +20,7 @@ export class DiscordAdapter {
       throw err;
     }
 
-    return this.client.user?.displayAvatarURL();
+    return this.client.user.displayAvatarURL();
   }
 
   getBotUsertag() {
@@ -26,6 +30,6 @@ export class DiscordAdapter {
       throw err;
     }
 
-    return this.client.user?.tag;
+    return this.client.user.tag;
   }
 }

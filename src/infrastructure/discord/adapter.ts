@@ -14,21 +14,13 @@ export class DiscordAdapter {
   }
 
   getBotAvatarUrl() {
-    if (!this.client.user) {
-      const err = new Error("Client is not ready.");
-      this.logger.error(err);
-      throw err;
-    }
+    if (!this.client.user)  throw new Error("Client is not ready.");
 
     return this.client.user.displayAvatarURL();
   }
 
   getBotUsertag() {
-    if (!this.client.user) {
-      const err = new Error("Client is not ready.");
-      this.logger.error(err);
-      throw err;
-    }
+    if (!this.client.user)  throw new Error("Client is not ready.");
 
     return this.client.user.tag;
   }

@@ -1,6 +1,6 @@
 import "dotenv/config";
 
-import { createClient } from "./client";
+import { createClient } from "./infrastructure/discord/client";
 import { registerReadyEvent } from "./events/ready";
 import { registerMessageCreateEvent } from "./events/messageCreate";
 import { registerInteractionEvent } from "./events/interactionCreate";

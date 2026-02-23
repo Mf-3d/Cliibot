@@ -1,0 +1,12 @@
+name: Deploy to Render on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render Deploy Hook
+        run: curl -X POST ${{ secrets.RENDER_COM_DEPLOY_HOOK }}

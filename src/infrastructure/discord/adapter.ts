@@ -4,7 +4,7 @@ export class DiscordAdapter {
   private readonly client: Client;
   private readonly logger: Logger;
 
-  constructor (client: Client, logger: Logger) {
+  constructor(client: Client, logger: Logger) {
     this.client = client;
     this.logger = logger;
   }
@@ -16,7 +16,7 @@ export class DiscordAdapter {
   getBotAvatarUrl() {
     if (!this.client.user) {
       const err = new Error("Client is not ready.");
-      this.logger.error(err)
+      this.logger.error(err);
       throw err;
     }
 
@@ -26,7 +26,7 @@ export class DiscordAdapter {
   getBotUsertag() {
     if (!this.client.user) {
       const err = new Error("Client is not ready.");
-      this.logger.error(err)
+      this.logger.error(err);
       throw err;
     }
 

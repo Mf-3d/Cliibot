@@ -1,12 +1,10 @@
 import { Client } from "discord.js";
-import { logger } from "../utils/logger";
-import { Command } from "src/commands/command";
+import { Logger } from "../utils/logger/";
+import { Command } from "src/commands/Command";
 
-export function registerReadyEvent(client: Client, commands: Command[]) {
+export function registerReadyEvent(client: Client, commands: Command[], logger: Logger) {
   client.once("ready", async () => {
-    logger.info(`Logged in as: ${client.user?.tag}`, {
-      emoji: "🪵"
-    });
+    logger.info(`🪵 Logged in as: ${client.user?.tag}`);
 
     const slashCommands = commands.map(c => ({
       name: c.name,

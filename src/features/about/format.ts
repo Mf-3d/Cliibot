@@ -39,5 +39,6 @@ export function toEmbed (view: AboutViewModel) {
   .setTitle(view.title)
   .setThumbnail(view.thumbnail)
   .addFields(view.fields)
-  .setTimestamp();
+  .setTimestamp()
+  .setColor("#2e77ff");
 }

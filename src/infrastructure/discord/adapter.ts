@@ -2,11 +2,9 @@ import { Client } from "discord.js";
 import { Logger } from "@/utils/logger/";
 export class DiscordAdapter {
   private readonly client: Client;
-  private readonly logger: Logger;
 
-  constructor(client: Client, logger: Logger) {
+  constructor(client: Client) {
     this.client = client;
-    this.logger = logger;
   }
 
   getWebSocketPing(): number {

@@ -26,7 +26,7 @@ process.on("uncaughtException", (err) => {
 const client = createClient();
 
 // アダプター
-const discordAdapter = new DiscordAdapter(client, logger);
+const discordAdapter = new DiscordAdapter(client);
 
 // コマンド
 const botInfoRepository = new DiscordBotInfoRepository(discordAdapter);
@@ -41,7 +41,7 @@ const commands = [
   pingCommand
 ];
 
-registerInteractionEvent(client, commands);
+registerInteractionEvent(client, logger, commands);
 registerReadyEvent(client, logger, commands, config);
 registerMessageCreateEvent(client, logger);
 

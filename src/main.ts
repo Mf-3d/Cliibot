@@ -34,7 +34,7 @@ const aboutUseCase = new AboutUseCase(botInfoRepository);
 const aboutCommand = new AboutCommand(aboutUseCase);
 
 const pingUseCase = new PingUseCase();
-const pingCommand = new PingCommand(pingUseCase, discordAdapter);
+const pingCommand = new PingCommand(pingUseCase, discordAdapter, logger);
 
 const commands = [
   aboutCommand,

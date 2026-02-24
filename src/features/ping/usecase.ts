@@ -6,7 +6,7 @@ export class PingUseCase {
       `WebSocket: **${wsPing}ms**`
     ];
 
-    if (interactionLatency > 100) lines.push("⚠️ ちょっと遅くない？");
+    if (interactionLatency > 200) lines.push("⚠️ ちょっと遅くない？");
     
     return lines.filter(Boolean).join("\n");
   }

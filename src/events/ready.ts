@@ -12,6 +12,10 @@ export function registerReadyEvent(
   client.once("ready", async () => {
     logger.info(`🪵 Logged in as: ${client.user?.tag}`);
 
-    registerCommands(commands, config);
+    try {
+      registerCommands(commands, config);
+    } catch (err) {
+      logger.error(`Failed to register commands: ${err}`);
+    }
   });
 }

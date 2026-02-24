@@ -10,6 +10,9 @@ import { AboutUseCase } from "@/features/about/usecase";
 import { PingUseCase } from "@/features/ping/usecase";
 import { PingCommand } from "@/features/ping/command";
 import { DiscordBotInfoRepository } from "@/features/about/discordBotInfoRepository";
+import { registerGuildCreateEvent } from "./events/guildCreate";
+import { GuildOnBoardingUseCase } from "./features/guildOnboarding/usecase";
+import { GuildOnboardingService } from "./features/guildOnboarding/service";
 
 // ロガーを生成
 const logger = new Logger();
@@ -41,8 +44,12 @@ const commands = [
   pingCommand
 ];
 
+const guildOnboardingService = new GuildOnboardingService(logger);
+const guildOnBoardingUseCase = new GuildOnBoardingUseCase(guildOnboardingService);
+
 registerInteractionEvent(client, logger, commands);
 registerReadyEvent(client, logger, commands, config);
 registerMessageCreateEvent(client, logger);
+registerGuildCreateEvent(guildOnBoardingUseCase, client, logger);
 
 client.login(process.env.DISCORD_TOKEN);

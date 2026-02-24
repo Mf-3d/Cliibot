@@ -4,6 +4,7 @@ import chalk from "chalk";
 import stripAnsi from "strip-ansi";
 
 import { LogLevel } from "./levels";
+import { styleText } from "node:util";
 
 export interface Writer {
   write(level: LogLevel, text: string): void;
@@ -11,14 +12,18 @@ export interface Writer {
 
 export class ConsoleWriter implements Writer {
   write(level: LogLevel, text: string) {
-    const colored = this.colorize(level, text);
-  
-    if (level === "error") {
-      console.error(colored);
-    } else if (level === "warn") {
-      console.warn(colored);
-    } else {
-      console.log(colored);
+    try {
+      const colored = this.colorize(level, text);
+      
+      if (level === "error") {
+        console.error(colored);
+      } else if (level === "warn") {
+        console.warn(colored);
+      } else {
+        console.log(colored);
+      }
+    } catch (err) {
+      console.error(styleText([ "red", "bold" ], "Failed to write to console:"), err);
     }
   }
 
@@ -45,14 +50,18 @@ export class FileWriter implements Writer {
   }
 
   write(_level: LogLevel, text: string): void {
-    const plain = stripAnsi(text);
+    try {
+      const plain = stripAnsi(text);
 
-    const dir = path.dirname(this.filePath);
+      const dir = path.dirname(this.filePath);
 
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+
+      fs.appendFileSync(this.filePath, `${plain}\n`);
+    } catch (err) {
+      console.error(styleText([ "red", "bold" ], "Failed to write to file:"), err);
     }
-
-    fs.appendFileSync(this.filePath, `${plain}\n`);
   }
 }

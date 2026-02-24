@@ -2,6 +2,7 @@ import { LOG_LEVEL_PRIORITY, LogLevel } from "./levels";
 import { Formatter } from "./formatter";
 import { Writer, ConsoleWriter, FileWriter } from "./writer";
 import { NormalizedLog, Normalizer } from "./normalizer";
+import { styleText } from "node:util";
 
 export class Logger {
   private currentLogLevel: LogLevel = "info";
@@ -42,14 +43,29 @@ export class Logger {
   }
 
   info (message: string) {
-    this.output("info", this.normalizer.normalize(message));;
+    try {
+      const normalized = this.normalizer.normalize(message);
+      this.output("info", normalized);
+    } catch (err) {
+      console.error(styleText([ "red", "bold" ], "Failed to output log:"), err);
+    }
   }
 
   warn (message: string) {
-    this.output("warn", this.normalizer.normalize(message));;
+    try {
+      const normalized = this.normalizer.normalize(message);
+      this.output("warn", normalized);
+    } catch (err) {
+      console.error(styleText([ "red", "bold" ], "Failed to output log:"), err);
+    }
   }
 
   error (message: string | Error) {
-    this.output("error", this.normalizer.normalize(message));;
+    try {
+      const normalized = this.normalizer.normalize(message);
+      this.output("error", normalized);
+    } catch (err) {
+      console.error(styleText([ "red", "bold" ], "Failed to output log:"), err);
+    }
   }
 }

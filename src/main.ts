@@ -13,6 +13,7 @@ import { DiscordBotInfoRepository } from "@/features/about/discordBotInfoReposit
 import { registerGuildCreateEvent } from "./events/guildCreate";
 import { GuildOnBoardingUseCase } from "./features/guildOnboarding/usecase";
 import { GuildOnboardingService } from "./features/guildOnboarding/service";
+import { createServer } from "./infrastructure/server";
 
 // ロガーを生成
 const logger = new Logger();
@@ -26,6 +27,7 @@ process.on("uncaughtException", (err) => {
   logger.error(`[Uncaught Exception] ${err}`);
 });
 
+createServer(config.serverPort, logger);
 const client = createClient();
 
 // アダプター

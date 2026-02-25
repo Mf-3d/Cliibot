@@ -12,9 +12,7 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
-    "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.16",
-    "tsconfig-paths": "^4.2.0",
     "tsx": "^4.21.0"
   },
   "homepage": "https://github.com/Mf-3d/Cliibot#readme",

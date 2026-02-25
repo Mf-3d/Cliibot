@@ -9,6 +9,7 @@ export interface EnvConfig {
   botEnv?: BotEnv;
   guildId?: string;
   isDev: boolean;
+  serverPort: number;
 }
 
 function requireEnv(name: string): string {
@@ -38,4 +39,5 @@ export const config: EnvConfig = {
     botEnv === "dev"
       ? requireEnv("DEV_GUILD_ID")
       : undefined,
+  serverPort: Number(requireEnv("SERVER_PORT")),
 };

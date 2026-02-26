@@ -1,5 +1,5 @@
-import { DiscordAdapter } from "src/infrastructure/discord/adapter";
-import { BotInfoRepository } from "./botInfoRepository";
+import { DiscordAdapter } from "./adapter";
+import { BotInfoRepository } from "@/features/about/botInfoRepository";
 import pkg from "@/../package.json";
 
 export class DiscordBotInfoRepository implements BotInfoRepository {

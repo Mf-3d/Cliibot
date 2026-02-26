@@ -9,7 +9,7 @@ import { AboutCommand } from "@/features/about/command";
 import { AboutUseCase } from "@/features/about/usecase";
 import { PingUseCase } from "@/features/ping/usecase";
 import { PingCommand } from "@/features/ping/command";
-import { DiscordBotInfoRepository } from "@/features/about/discordBotInfoRepository";
+import { DiscordBotInfoRepository } from "@/infrastructure/discord/discordBotInfoRepository";
 import { registerGuildCreateEvent } from "./events/guildCreate";
 import { GuildOnBoardingUseCase } from "./features/guildOnboarding/usecase";
 import { GuildOnboardingService } from "./features/guildOnboarding/service";

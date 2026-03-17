@@ -5,7 +5,7 @@ export function createServer(port: number, logger: Logger) {
   const app = express();
 
   app.get("/", (req, res) => {
-    res.redirect("https://mf-3d.github.io/project/cliibot/");
+    res.redirect("https://mf-3d.github.io/");
   });
 
   app.listen(port, () => {

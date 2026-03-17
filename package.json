@@ -1,6 +1,6 @@
 {
   "name": "cliibot",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "It could be a robot.",
   "dependencies": {
     "chalk": "^5.6.2",

@@ -21,13 +21,27 @@ export function formatBotInfo (info: BotInfo): AboutViewModel {
 /**
  * @param uptime アップタイムの秒数
  */
-function formatUptime (uptime: number): string {
-  let day = Math.floor(uptime / 86400);
-  let hr = Math.floor((uptime % 86400) / 3600);
-  let min = Math.floor((uptime % 3600) / 60);
+function formatUptime(uptime: number): string {
   let sec = Math.floor(uptime % 60);
+  let min = Math.floor((uptime % 3600) / 60);
+  let hr = Math.floor((uptime % 86400) / 3600);
+  let day = Math.floor(uptime / 86400);
 
-  return `${day}d ${hr}h ${min}m ${sec}s`
+  let result = [
+    formatUnit(day, "day"),
+    formatUnit(hr, "hour"),
+    formatUnit(min, "minute"),
+    formatUnit(sec, "second"),
+  ]
+  .filter(Boolean)
+  .join(" ");
+
+  return result || "0 seconds";
+}
+
+function formatUnit(value: number, unit: string): string | null {
+  if (value === 0) return null;
+  return value === 1 ? `${value} ${unit}` : `${value} ${unit}s`;
 }
 
 /**

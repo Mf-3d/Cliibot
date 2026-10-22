@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
-    "tsc-alias": "^1.9.4",
+    "tsc-alias": "^1.9.9",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3"
   },

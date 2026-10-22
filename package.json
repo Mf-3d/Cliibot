@@ -12,7 +12,7 @@
   "devDependencies": {
     "@types/express": "^5.0.6",
     "tsc-alias": "^1.9.4",
-    "tsx": "^4.23.13",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3"
   },
   "homepage": "https://github.com/Mf-3d/Cliibot#readme",

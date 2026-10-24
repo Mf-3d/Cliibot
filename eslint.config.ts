@@ -1,13 +1,13 @@
 import { defineConfig } from "eslint/config";
-import tseslint from "typescript-eslint";
+import tseslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import eslintConfigPrettier from "eslint-config-prettier";
+import importPlugin from "eslint-plugin-import";
 
-export default defineConfig([
+export default [
   {
     ignores: ["tests/**/*", "out/**/*"],
   },
-  tseslint.configs.recommended,
   eslintConfigPrettier,
   {
     files: ["**/*.ts", "**/*.js"],
@@ -15,6 +15,7 @@ export default defineConfig([
       parser: tsParser,
     },
     plugins: {
+      import: importPlugin,
       "@typescript-eslint": tseslint,
     },
     rules: {
@@ -29,4 +30,4 @@ export default defineConfig([
       "prefer-arrow-callback": "error",
     },
   },
-]);
+];

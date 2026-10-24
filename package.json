@@ -37,8 +37,16 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc -p ./tsconfig.json && tsc-alias -p tsconfig.json",
+    "build": "npm run check & tsgo -p ./tsconfig.json && tsc-alias -p tsconfig.json",
     "start": "node ./dist/main",
-    "dev": "tsx ./src/main"
+    "dev": "npm run check & tsx ./src/main",
+    "check": "tsc",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
   }
 }

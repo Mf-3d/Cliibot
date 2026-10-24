@@ -3,11 +3,11 @@ export class PingUseCase {
     const lines = [
       "**🏓 Pong!**",
       `Interaction: **${interactionLatency}ms**`,
-      `WebSocket: **${wsPing}ms**`
+      `WebSocket: **${wsPing}ms**`,
     ];
 
     if (interactionLatency > 200) lines.push("⚠️ ちょっと遅くない？");
-    
+
     return lines.filter(Boolean).join("\n");
   }
 }

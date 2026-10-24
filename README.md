@@ -7,11 +7,9 @@
 
 [LiquidClii](https://github.com/Mf-3d/LiquidClii) の後継となる、Discordボットです。
 
-
 ## ✨ 主な機能
 
 - _???_
-
 
 ## ℹ️ 関連
 

@@ -2,7 +2,6 @@ import express from "express";
 
 import type { Logger } from "@/utils/logger";
 
-
 export function createServer(port: number, logger: Logger): Promise<void> {
   const app = express();
 

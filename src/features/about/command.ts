@@ -8,7 +8,10 @@ export class AboutCommand implements Command {
   name = "about";
   description = "Botの情報を表示します";
 
-  constructor(private readonly useCase: AboutUseCase, private readonly logger: Logger) {}
+  constructor(
+    private readonly useCase: AboutUseCase,
+    private readonly logger: Logger,
+  ) {}
 
   async execute(interaction: ChatInputCommandInteraction) {
     try {
@@ -22,7 +25,7 @@ export class AboutCommand implements Command {
         flags: MessageFlags.IsComponentsV2,
       });
     } catch (err) {
-      console.error(err)
+      console.error(err);
       this.logger.error(`Failed to execute AboutCommand: ${err}`);
       interaction.reply({
         content: "🛑 エラーが発生しました",

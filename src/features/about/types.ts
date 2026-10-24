@@ -13,6 +13,6 @@ export type BotInfo = {
 export type AboutViewModel = {
   title: string;
   thumbnail: string;
-  fields: { name: string; value: string, inline?: boolean }[];
+  fields: { name: string; value: string; inline?: boolean }[];
   buttons: { name: string; url?: string; customId?: string }[];
 };

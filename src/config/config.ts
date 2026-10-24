@@ -38,9 +38,6 @@ export const config: EnvConfig = {
   clientId: requireEnv("DISCORD_CLIENT_ID"),
   botEnv,
   isDev: botEnv === "dev",
-  devGuildId:
-    botEnv === "dev"
-      ? requireEnv("DEV_GUILD_ID")
-      : null,
+  devGuildId: botEnv === "dev" ? requireEnv("DEV_GUILD_ID") : null,
   serverPort: Number(requireEnv("SERVER_PORT")),
 };

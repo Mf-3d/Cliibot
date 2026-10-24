@@ -56,7 +56,15 @@ async function setupBot(logger: Logger) {
     guildOnboardingService,
   );
 
-  registerReadyEvent(client, logger, commands, config.token, config.isDev, config.clientId, config.devGuildId);
+  registerReadyEvent(
+    client,
+    logger,
+    commands,
+    config.token,
+    config.isDev,
+    config.clientId,
+    config.devGuildId,
+  );
   registerInteractionEvent(client, logger, commands);
   registerMessageCreateEvent(client, logger);
   registerGuildCreateEvent(guildOnBoardingUseCase, client, logger);

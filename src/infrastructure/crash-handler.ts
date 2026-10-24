@@ -1,6 +1,5 @@
 import type { Logger } from "@/utils/logger";
 
-
 export function registerCrashHandler(logger: Logger) {
   logger.info("💭 Registering the crash handler...");
 

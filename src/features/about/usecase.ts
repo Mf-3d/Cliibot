@@ -2,7 +2,10 @@ import { BotInfoRepository } from "./botInfoRepository";
 import { BotInfo } from "./types";
 
 export class AboutUseCase {
-  constructor(private readonly repository: BotInfoRepository, private readonly botName: string | undefined) { }
+  constructor(
+    private readonly repository: BotInfoRepository,
+    private readonly botName: string | undefined,
+  ) {}
 
   getBotInfo(): BotInfo {
     return {
@@ -12,7 +15,7 @@ export class AboutUseCase {
       author: this.repository.getAuthor(),
       avatarUrl: this.repository.getAvatarUrl(),
       uptime: Math.floor(process.uptime()),
-      links: this.repository.getLinks()
+      links: this.repository.getLinks(),
     };
   }
 }

@@ -10,7 +10,9 @@ export function registerMessageCreateEvent(client: Client, logger: Logger) {
       try {
         message.reply("pong!");
       } catch (err) {
-        logger.error(`Failed to reply message from "${message.author.tag}": ${err}`);
+        logger.error(
+          `Failed to reply message from "${message.author.tag}": ${err}`,
+        );
 
         await message.reply("**🛑 エラーが発生しました**").catch(() => {});
       }

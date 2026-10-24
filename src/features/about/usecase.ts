@@ -1,12 +1,13 @@
 import { BotInfo } from "./types";
 import { BotInfoRepository } from "./botInfoRepository";
+import { EnvConfig } from "@/config/config";
 
 export class AboutUseCase {
-  constructor (private readonly repository: BotInfoRepository) {}
+  constructor(private readonly repository: BotInfoRepository, private readonly config: EnvConfig) { }
 
   getBotInfo(): BotInfo {
     return {
-      name: process.env.BOT_NAME ?? "UNNAMED BOT",
+      name: this.config.name ?? "UNNAMED BOT",
       usertag: this.repository.getUsertag(),
       version: this.repository.getVersion(),
       author: this.repository.getAuthor(),

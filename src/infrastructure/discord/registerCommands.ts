@@ -13,10 +13,10 @@ export async function registerCommands(
   }));
 
   if (config.isDev) {
-    if (!config.guildId) throw new Error("GUILD_ID is not defined.");
+    if (!config.devGuildId) throw new Error("DEV_GUILD_ID is not defined.");
 
     await rest.put(
-      Routes.applicationGuildCommands(config.clientId, config.guildId),
+      Routes.applicationGuildCommands(config.clientId, config.devGuildId),
       { body: slashCommands }
     );
   } else {

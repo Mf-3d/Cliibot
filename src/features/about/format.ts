@@ -7,6 +7,8 @@ import {
   ButtonBuilder,
   ActionRowBuilder,
   ButtonStyle,
+  SeparatorBuilder,
+  SeparatorSpacingSize,
 } from "discord.js";
 import { AboutViewModel, BotInfo } from "./types";
 
@@ -91,16 +93,20 @@ export function toComponents(view: AboutViewModel) {
       // Add fields
       .addTextDisplayComponents(
         new TextDisplayBuilder().setContent(
-          view.fields.map((field) => `**${field.name}**: ${field.value}`).join("\n")
+          view.fields
+            .map((field) => `**${field.name}**: ${field.value}`)
+            .join("\n"),
         ),
-        // view.fields.map((field) =>
-        //   new TextDisplayBuilder().setContent(
-        //     `**${field.name}**: ${field.value}`,
-        //   ),
-        // ),
       )
       // Add thumbnail
       .setThumbnailAccessory(new ThumbnailBuilder().setURL(view.thumbnail)),
+  );
+
+  // Add a separator
+  container.addSeparatorComponents(
+    new SeparatorBuilder()
+      .setDivider(true)
+      .setSpacing(SeparatorSpacingSize.Large),
   );
 
   // Add link buttons

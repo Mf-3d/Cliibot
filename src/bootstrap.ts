@@ -1,24 +1,22 @@
 import { config } from "@/config/config";
-import { Logger } from "@/utils/logger";
 
-import { registerCrashHandler } from "@/infrastructure/crash-handler";
-import { createServer } from "@/infrastructure/server";
-import { createClient } from "@/infrastructure/discord/client";
-
-import { DiscordAdapter } from "@/infrastructure/discord/adapter";
-import { DiscordBotInfoRepository } from "@/infrastructure/discord/discordBotInfoRepository";
-
-import { registerReadyEvent } from "@/events/ready";
-import { registerMessageCreateEvent } from "@/events/messageCreate";
-import { registerInteractionEvent } from "@/events/interactionCreate";
 import { registerGuildCreateEvent } from "@/events/guildCreate";
+import { registerInteractionEvent } from "@/events/interactionCreate";
+import { registerMessageCreateEvent } from "@/events/messageCreate";
+import { registerReadyEvent } from "@/events/ready";
 
 import { AboutCommand } from "@/features/about/command";
 import { AboutUseCase } from "@/features/about/usecase";
-import { PingUseCase } from "@/features/ping/usecase";
-import { PingCommand } from "@/features/ping/command";
-import { GuildOnBoardingUseCase } from "@/features/guildOnboarding/usecase";
 import { GuildOnboardingService } from "@/features/guildOnboarding/service";
+import { GuildOnBoardingUseCase } from "@/features/guildOnboarding/usecase";
+import { PingCommand } from "@/features/ping/command";
+import { PingUseCase } from "@/features/ping/usecase";
+import { registerCrashHandler } from "@/infrastructure/crash-handler";
+import { DiscordAdapter } from "@/infrastructure/discord/adapter";
+import { createClient } from "@/infrastructure/discord/client";
+import { DiscordBotInfoRepository } from "@/infrastructure/discord/discordBotInfoRepository";
+import { createServer } from "@/infrastructure/server";
+import { Logger } from "@/utils/logger";
 
 export async function bootstrap() {
   // ロガーを生成

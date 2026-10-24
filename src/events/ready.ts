@@ -1,7 +1,7 @@
 import { Client } from "discord.js";
-import { Logger } from "@/utils/logger/";
-import { registerCommands } from "@/infrastructure/discord/registerCommands";
 import { Command } from "@/commands/Command";
+import { registerCommands } from "@/infrastructure/discord/registerCommands";
+import { Logger } from "@/utils/logger/";
 
 export function registerReadyEvent(
   client: Client,

@@ -1,10 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
+import { styleText } from "node:util";
 import chalk from "chalk";
 import stripAnsi from "strip-ansi";
 
 import { LogLevel } from "./levels";
-import { styleText } from "node:util";
 
 export interface Writer {
   write(level: LogLevel, text: string): void;

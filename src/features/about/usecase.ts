@@ -1,5 +1,5 @@
-import { BotInfo } from "./types";
 import { BotInfoRepository } from "./botInfoRepository";
+import { BotInfo } from "./types";
 
 export class AboutUseCase {
   constructor(private readonly repository: BotInfoRepository, private readonly botName: string | undefined) { }

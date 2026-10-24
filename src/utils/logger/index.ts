@@ -1,8 +1,8 @@
-import { LOG_LEVEL_PRIORITY, LogLevel } from "./levels";
-import { Formatter } from "./formatter";
-import { Writer, ConsoleWriter, FileWriter } from "./writer";
-import { NormalizedLog, Normalizer } from "./normalizer";
 import { styleText } from "node:util";
+import { Formatter } from "./formatter";
+import { LOG_LEVEL_PRIORITY, LogLevel } from "./levels";
+import { NormalizedLog, Normalizer } from "./normalizer";
+import { Writer, ConsoleWriter, FileWriter } from "./writer";
 
 export class Logger {
   private currentLogLevel: LogLevel = "info";

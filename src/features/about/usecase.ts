@@ -12,7 +12,8 @@ export class AboutUseCase {
       version: this.repository.getVersion(),
       author: this.repository.getAuthor(),
       avatarUrl: this.repository.getAvatarUrl(),
-      uptime: Math.floor(process.uptime())
+      uptime: Math.floor(process.uptime()),
+      links: this.repository.getLinks()
     };
   }
 }

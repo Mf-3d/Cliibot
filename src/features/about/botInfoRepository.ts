@@ -4,4 +4,7 @@ export interface BotInfoRepository {
   getVersion(): string;
   getAuthor(): string;
   getAvatarUrl(): string;
+  getLinks(): {
+    [key: string]: string;
+  };
 }

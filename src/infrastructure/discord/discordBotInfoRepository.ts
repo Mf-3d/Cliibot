@@ -25,4 +25,10 @@ export class DiscordBotInfoRepository implements BotInfoRepository {
   getAvatarUrl(): string {
     return this.discordAdapter.getBotAvatarUrl();
   }
+
+  getLinks(): {
+    [key: string]: string;
+  } {
+    return this.config.links ?? {};
+  }
 }

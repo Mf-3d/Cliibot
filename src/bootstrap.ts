@@ -44,7 +44,7 @@ async function setupBot(logger: Logger) {
   // コマンド
   const botInfoRepository = new DiscordBotInfoRepository(discordAdapter, config);
   const aboutUseCase = new AboutUseCase(botInfoRepository, config);
-  const aboutCommand = new AboutCommand(aboutUseCase);
+  const aboutCommand = new AboutCommand(aboutUseCase, logger);
 
   const pingUseCase = new PingUseCase();
   const pingCommand = new PingCommand(pingUseCase, discordAdapter, logger);

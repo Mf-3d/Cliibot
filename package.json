@@ -11,11 +11,15 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
+    "@typescript/native-preview": "^7.0.0-dev.20260707.2",
     "eslint": "^10.13.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.7",
     "prettier": "^3.9.10",
     "tsc-alias": "^1.9.9",
     "tsx": "^4.23.15",
-    "typescript": "^7.0.2"
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.0"
   },
   "homepage": "https://github.com/Mf-3d/Cliibot#readme",
   "bugs": {

@@ -1,4 +1,4 @@
-import { config } from "@/config/env";
+import { config } from "@/config/config";
 import { Logger } from "@/utils/logger";
 
 import { registerCrashHandler } from "@/infrastructure/crash-handler";
@@ -28,7 +28,7 @@ export async function bootstrap() {
 
   registerCrashHandler(logger);
 
-  
+
   await setupBot(logger);
   await setupServer(logger);
 }
@@ -42,8 +42,8 @@ async function setupBot(logger: Logger) {
   const discordAdapter = new DiscordAdapter(client);
 
   // コマンド
-  const botInfoRepository = new DiscordBotInfoRepository(discordAdapter);
-  const aboutUseCase = new AboutUseCase(botInfoRepository);
+  const botInfoRepository = new DiscordBotInfoRepository(discordAdapter, config);
+  const aboutUseCase = new AboutUseCase(botInfoRepository, config);
   const aboutCommand = new AboutCommand(aboutUseCase);
 
   const pingUseCase = new PingUseCase();
@@ -62,7 +62,7 @@ async function setupBot(logger: Logger) {
   registerMessageCreateEvent(client, logger);
   registerGuildCreateEvent(guildOnBoardingUseCase, client, logger);
 
-  await client.login(process.env.DISCORD_TOKEN);
+  await client.login(config.token);
 
   logger.info("✔️ The bot setup is complete.");
 }
@@ -71,6 +71,6 @@ async function setupServer(logger: Logger) {
   logger.info("💭 Setting up the server...");
 
   await createServer(config.serverPort, logger);
-  
+
   logger.info("✔️ The server setup is complete.");
 }

@@ -1,13 +1,12 @@
 import { DiscordAdapter } from "./adapter";
 import { BotInfoRepository } from "@/features/about/botInfoRepository";
 import pkg from "@/../package.json";
-import { EnvConfig } from "@/config/config";
 
 export class DiscordBotInfoRepository implements BotInfoRepository {
-  constructor(private readonly discordAdapter: DiscordAdapter, private readonly config: EnvConfig) { }
+  constructor(private readonly discordAdapter: DiscordAdapter, private readonly botName: string | undefined, private readonly links: { [key: string]: string }) { }
 
   getName(): string {
-    return this.config.name ?? "UNNAMED BOT";
+    return this.botName ?? "UNNAMED BOT";
   }
 
   getUsertag(): string {
@@ -29,6 +28,6 @@ export class DiscordBotInfoRepository implements BotInfoRepository {
   getLinks(): {
     [key: string]: string;
   } {
-    return this.config.links ?? {};
+    return this.links ?? {};
   }
 }

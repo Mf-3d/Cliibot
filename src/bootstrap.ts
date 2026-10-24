@@ -20,14 +20,12 @@ import { PingCommand } from "@/features/ping/command";
 import { GuildOnBoardingUseCase } from "@/features/guildOnboarding/usecase";
 import { GuildOnboardingService } from "@/features/guildOnboarding/service";
 
-
 export async function bootstrap() {
   // ロガーを生成
   const logger = new Logger();
   logger.setLogLevel("info");
 
   registerCrashHandler(logger);
-
 
   await setupBot(logger);
   await setupServer(logger);
@@ -42,22 +40,25 @@ async function setupBot(logger: Logger) {
   const discordAdapter = new DiscordAdapter(client);
 
   // コマンド
-  const botInfoRepository = new DiscordBotInfoRepository(discordAdapter, config);
-  const aboutUseCase = new AboutUseCase(botInfoRepository, config);
+  const botInfoRepository = new DiscordBotInfoRepository(
+    discordAdapter,
+    config.name,
+    config.links ?? {},
+  );
+  const aboutUseCase = new AboutUseCase(botInfoRepository, config.name);
   const aboutCommand = new AboutCommand(aboutUseCase, logger);
 
   const pingUseCase = new PingUseCase();
   const pingCommand = new PingCommand(pingUseCase, discordAdapter, logger);
 
-  const commands = [
-    aboutCommand,
-    pingCommand
-  ];
+  const commands = [aboutCommand, pingCommand];
 
   const guildOnboardingService = new GuildOnboardingService(logger);
-  const guildOnBoardingUseCase = new GuildOnBoardingUseCase(guildOnboardingService);
+  const guildOnBoardingUseCase = new GuildOnBoardingUseCase(
+    guildOnboardingService,
+  );
 
-  registerReadyEvent(client, logger, commands, config);
+  registerReadyEvent(client, logger, commands, config.token, config.isDev, config.clientId, config.devGuildId);
   registerInteractionEvent(client, logger, commands);
   registerMessageCreateEvent(client, logger);
   registerGuildCreateEvent(guildOnBoardingUseCase, client, logger);

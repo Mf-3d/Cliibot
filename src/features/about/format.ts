@@ -112,12 +112,14 @@ export function toComponents(view: AboutViewModel) {
   // Add link buttons
   container.addActionRowComponents(
     new ActionRowBuilder<ButtonBuilder>().addComponents(
-      Object.entries(view.buttons).map(([_, item]) =>
-        new ButtonBuilder()
-          .setLabel(item.name)
-          .setURL(item.url ?? "")
-          .setStyle(ButtonStyle.Link),
-      ),
+      Object.values(view.buttons)
+        .filter((item) => item.url)
+        .map((item) =>
+          new ButtonBuilder()
+            .setLabel(item.name)
+            .setURL(item.url!)
+            .setStyle(ButtonStyle.Link),
+        ),
     ),
   );
 

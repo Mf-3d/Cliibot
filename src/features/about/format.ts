@@ -78,8 +78,9 @@ export function toEmbed(view: AboutViewModel) {
 /**
  * @param view 表示用にフォーマットされたボットの情報
  * @returns
+ * @deprecated
  */
-export function toComponents(view: AboutViewModel) {
+export function buildComponents(view: AboutViewModel) {
   const container = new ContainerBuilder();
 
   // Add title

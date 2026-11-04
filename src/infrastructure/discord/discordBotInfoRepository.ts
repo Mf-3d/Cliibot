@@ -6,7 +6,9 @@ export class DiscordBotInfoRepository implements BotInfoRepository {
   constructor(
     private readonly discordAdapter: DiscordAdapter,
     private readonly botName: string | undefined,
+    private readonly isDev: boolean,
     private readonly links: { [key: string]: string },
+    private readonly startTime: Date,
   ) {}
 
   getName(): string {
@@ -18,7 +20,10 @@ export class DiscordBotInfoRepository implements BotInfoRepository {
   }
 
   getVersion(): string {
-    return pkg.version;
+    this.startTime.getDate;
+    return this.isDev
+      ? `@${this.startTime.getFullYear()}-${this.startTime.getMonth() + 1}-${this.startTime.getDate()}`
+      : pkg.version;
   }
 
   getAuthor(): string {

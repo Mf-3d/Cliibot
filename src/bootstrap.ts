@@ -23,13 +23,16 @@ export async function bootstrap() {
   const logger = new Logger();
   logger.setLogLevel("info");
 
+  const startTime = new Date();
+  logger.info(`Bot setup started at ${startTime.toLocaleString()}`);
+
   registerCrashHandler(logger);
 
-  await setupBot(logger);
+  await setupBot(logger, startTime);
   await setupServer(logger);
 }
 
-async function setupBot(logger: Logger) {
+async function setupBot(logger: Logger, startTime: Date) {
   logger.info("💭 Setting up the bot...");
 
   const client = createClient();
@@ -41,7 +44,9 @@ async function setupBot(logger: Logger) {
   const botInfoRepository = new DiscordBotInfoRepository(
     discordAdapter,
     config.name,
+    config.isDev,
     config.links ?? {},
+    startTime,
   );
   const aboutUseCase = new AboutUseCase(botInfoRepository, config.name);
   const aboutCommand = new AboutCommand(aboutUseCase, logger);

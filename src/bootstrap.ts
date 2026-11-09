@@ -1,4 +1,4 @@
-import { config } from "@/config/config";
+import { createConfig, EnvConfig } from "@/config/config";
 
 import { registerGuildCreateEvent } from "@/events/guildCreate";
 import { registerInteractionEvent } from "@/events/interactionCreate";
@@ -14,7 +14,7 @@ import { PingUseCase } from "@/features/ping/usecase";
 import { registerCrashHandler } from "@/infrastructure/crash-handler";
 import { DiscordAdapter } from "@/infrastructure/discord/adapter";
 import { createClient } from "@/infrastructure/discord/client";
-import { DiscordBotInfoRepository } from "@/infrastructure/discord/discordBotInfoRepository";
+// import { DiscordBotInfoRepository } from "@/infrastructure/discord/discordBotInfoRepository";
 import { createServer } from "@/infrastructure/server";
 import { Logger } from "@/utils/logger";
 
@@ -24,15 +24,18 @@ export async function bootstrap() {
   logger.setLogLevel("info");
 
   const startTime = new Date();
+
+  const config = createConfig(startTime);
+
   logger.info(`Bot setup started at ${startTime.toLocaleString()}`);
 
   registerCrashHandler(logger);
 
-  await setupBot(logger, startTime);
-  await setupServer(logger);
+  await setupBot(logger, config);
+  await setupServer(logger, config);
 }
 
-async function setupBot(logger: Logger, startTime: Date) {
+async function setupBot(logger: Logger, config: EnvConfig) {
   logger.info("💭 Setting up the bot...");
 
   const client = createClient();
@@ -41,14 +44,7 @@ async function setupBot(logger: Logger, startTime: Date) {
   const discordAdapter = new DiscordAdapter(client);
 
   // コマンド
-  const botInfoRepository = new DiscordBotInfoRepository(
-    discordAdapter,
-    config.name,
-    config.isDev,
-    config.links ?? {},
-    startTime,
-  );
-  const aboutUseCase = new AboutUseCase(botInfoRepository, config.name);
+  const aboutUseCase = new AboutUseCase(client, config);
   const aboutCommand = new AboutCommand(aboutUseCase, logger);
 
   const pingUseCase = new PingUseCase();
@@ -79,7 +75,7 @@ async function setupBot(logger: Logger, startTime: Date) {
   logger.info("✔️ The bot setup is complete.");
 }
 
-async function setupServer(logger: Logger) {
+async function setupServer(logger: Logger, config: EnvConfig) {
   logger.info("💭 Setting up the server...");
 
   await createServer(config.serverPort, logger);

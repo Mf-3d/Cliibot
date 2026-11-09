@@ -1,21 +1,24 @@
-import { BotInfoRepository } from "./botInfoRepository";
-import { BotInfo } from "./types";
+import type { Client } from "discord.js";
+import type { BotInfo } from "./types";
+import type { EnvConfig } from "@/config/config";
 
 export class AboutUseCase {
   constructor(
-    private readonly repository: BotInfoRepository,
-    private readonly botName: string | undefined,
+    private readonly client: Client,
+    private readonly config: EnvConfig,
   ) {}
 
   getBotInfo(): BotInfo {
+    if (!this.client.user) throw new Error("Client is not ready.");
+
     return {
-      name: this.botName ?? "UNNAMED BOT",
-      usertag: this.repository.getUsertag(),
-      version: this.repository.getVersion(),
-      author: this.repository.getAuthor(),
-      avatarUrl: this.repository.getAvatarUrl(),
+      name: this.config.name,
+      usertag: this.client.user.tag,
+      version: this.config.version,
+      author: this.config.author,
+      avatarUrl: this.client.user.displayAvatarURL(),
       uptime: Math.floor(process.uptime()),
-      links: this.repository.getLinks(),
+      links: this.config.links,
     };
   }
 }

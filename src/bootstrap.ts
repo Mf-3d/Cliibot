@@ -1,9 +1,9 @@
 import { createConfig, EnvConfig } from "@/config/config";
 
+import { registerClientReadyEvent } from "@/events/clientReady";
 import { registerGuildCreateEvent } from "@/events/guildCreate";
 import { registerInteractionEvent } from "@/events/interactionCreate";
 import { registerMessageCreateEvent } from "@/events/messageCreate";
-import { registerReadyEvent } from "@/events/ready";
 
 import { AboutCommand } from "@/features/about/command";
 import { AboutUseCase } from "@/features/about/usecase";
@@ -57,7 +57,7 @@ async function setupBot(logger: Logger, config: EnvConfig) {
     guildOnboardingService,
   );
 
-  registerReadyEvent(
+  registerClientReadyEvent(
     client,
     logger,
     commands,

@@ -1,6 +1,5 @@
-import tseslint from "@typescript-eslint/eslint-plugin";
-import tsParser from "@typescript-eslint/parser";
-import eslintConfigPrettier from "eslint-config-prettier";
+import js from "@eslint/js";
+import tseslint from "typescript-eslint";
 import importPlugin from "eslint-plugin-import";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 
@@ -8,15 +7,14 @@ export default [
   {
     ignores: ["tests/**/*", "out/**/*"],
   },
-  eslintConfigPrettier,
+
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+
   {
     files: ["**/*.ts"],
-    languageOptions: {
-      parser: tsParser,
-    },
     plugins: {
       import: importPlugin,
-      "@typescript-eslint": tseslint,
     },
     rules: {
       "import/order": [
@@ -25,11 +23,12 @@ export default [
           alphabetize: { order: "asc" },
         },
       ],
-      "@typescript-eslint/no-unused-vars": "error",
       "prefer-arrow-callback": "error",
     },
   },
+
   eslintPluginPrettierRecommended,
+
   {
     rules: {
       "prettier/prettier": "warn",

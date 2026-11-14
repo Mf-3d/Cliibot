@@ -3,7 +3,7 @@ import type { Logger } from "@/utils/logger";
 export function registerCrashHandler(logger: Logger) {
   logger.info("💭 Registering the crash handler...");
 
-  process.on("unhandledRejection", (reason, _promise) => {
+  process.on("unhandledRejection", (reason) => {
     logger.error(`[Unhandled Rejection] ${reason}`);
   });
 

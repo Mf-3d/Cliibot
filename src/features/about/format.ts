@@ -38,12 +38,12 @@ export function formatBotInfo(info: BotInfo): AboutViewModel {
  * @param uptime アップタイムの秒数
  */
 function formatUptime(uptime: number): string {
-  let sec = Math.floor(uptime % 60);
-  let min = Math.floor((uptime % 3600) / 60);
-  let hr = Math.floor((uptime % 86400) / 3600);
-  let day = Math.floor(uptime / 86400);
+  const sec = Math.floor(uptime % 60);
+  const min = Math.floor((uptime % 3600) / 60);
+  const hr = Math.floor((uptime % 86400) / 3600);
+  const day = Math.floor(uptime / 86400);
 
-  let result = [
+  const result = [
     formatUnit(day, "day"),
     formatUnit(hr, "hour"),
     formatUnit(min, "minute"),

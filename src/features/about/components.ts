@@ -19,9 +19,7 @@ export function buildComponents(view: AboutViewModel) {
   const container = new ContainerBuilder();
 
   // Add title
-  container.addTextDisplayComponents(
-    new TextDisplayBuilder().setContent(`## ${view.title}`),
-  );
+  container.addTextDisplayComponents(new TextDisplayBuilder().setContent(`## ${view.title}`));
 
   // Add thumbnail and fields in a section
   container.addSectionComponents(
@@ -29,20 +27,16 @@ export function buildComponents(view: AboutViewModel) {
       // Add fields
       .addTextDisplayComponents(
         new TextDisplayBuilder().setContent(
-          view.fields
-            .map((field) => `**${field.name}**: ${field.value}`)
-            .join("\n"),
-        ),
+          view.fields.map((field) => `**${field.name}**: ${field.value}`).join("\n")
+        )
       )
       // Add thumbnail
-      .setThumbnailAccessory(new ThumbnailBuilder().setURL(view.thumbnail)),
+      .setThumbnailAccessory(new ThumbnailBuilder().setURL(view.thumbnail))
   );
 
   // Add a separator
   container.addSeparatorComponents(
-    new SeparatorBuilder()
-      .setDivider(true)
-      .setSpacing(SeparatorSpacingSize.Large),
+    new SeparatorBuilder().setDivider(true).setSpacing(SeparatorSpacingSize.Large)
   );
 
   // Add link buttons
@@ -51,18 +45,13 @@ export function buildComponents(view: AboutViewModel) {
       Object.values(view.buttons)
         .filter((item) => item.url)
         .map((item) =>
-          new ButtonBuilder()
-            .setLabel(item.name)
-            .setURL(item.url!)
-            .setStyle(ButtonStyle.Link),
-        ),
-    ),
+          new ButtonBuilder().setLabel(item.name).setURL(item.url!).setStyle(ButtonStyle.Link)
+        )
+    )
   );
 
   container.addTextDisplayComponents([
-    new TextDisplayBuilder().setContent(
-      `-# <t:${Math.floor(Date.now() / 1000)}:s>`,
-    ),
+    new TextDisplayBuilder().setContent(`-# <t:${Math.floor(Date.now() / 1000)}:s>`),
   ]);
 
   container.setAccentColor([46, 119, 255]);

@@ -11,8 +11,7 @@ export class GuildOnboardingService {
       if (!guild.members.me?.permissions.has("EmbedLinks")) return;
 
       const channel =
-        guild.systemChannel ??
-        guild.channels.cache.filter((c) => c.isTextBased()).first();
+        guild.systemChannel ?? guild.channels.cache.filter((c) => c.isTextBased()).first();
 
       if (!channel || !channel?.isTextBased()) return;
 
@@ -22,9 +21,7 @@ export class GuildOnboardingService {
         embeds: [embed],
       });
     } catch (err) {
-      this.logger.error(
-        `Failed to send welcome message at ${guild.name} (${guild.id}): ${err}`,
-      );
+      this.logger.error(`Failed to send welcome message at ${guild.name} (${guild.id}): ${err}`);
     }
   }
 }

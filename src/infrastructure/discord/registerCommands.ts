@@ -6,7 +6,7 @@ export async function registerCommands(
   token: string,
   isDev: boolean,
   clientId: string,
-  devGuildId: string | null,
+  devGuildId: string | null
 ) {
   const rest = new REST({ version: "10" }).setToken(token);
 

@@ -11,7 +11,7 @@ export class AboutCommand implements Command {
 
   constructor(
     private readonly useCase: AboutUseCase,
-    private readonly logger: Logger,
+    private readonly logger: Logger
   ) {}
 
   async execute(interaction: ChatInputCommandInteraction) {

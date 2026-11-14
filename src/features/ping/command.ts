@@ -11,7 +11,7 @@ export class PingCommand implements Command {
   constructor(
     private readonly useCase: PingUseCase,
     private readonly discordAdapter: DiscordAdapter,
-    private readonly logger: Logger,
+    private readonly logger: Logger
   ) {}
 
   async execute(interaction: ChatInputCommandInteraction) {
@@ -19,8 +19,7 @@ export class PingCommand implements Command {
       const interactionLatency = Date.now() - interaction.createdTimestamp;
       const wsPing = this.discordAdapter.getWebSocketPing();
 
-      if (interactionLatency > 200)
-        this.logger.warn(`Ping latency high: ${interactionLatency}ms`);
+      if (interactionLatency > 200) this.logger.warn(`Ping latency high: ${interactionLatency}ms`);
 
       const message = this.useCase.ping(interactionLatency, wsPing);
       await interaction.reply(message);

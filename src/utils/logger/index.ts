@@ -21,9 +21,7 @@ export class Logger {
   }
 
   private shouldLog(level: LogLevel): boolean {
-    return (
-      LOG_LEVEL_PRIORITY[level] >= LOG_LEVEL_PRIORITY[this.currentLogLevel]
-    );
+    return LOG_LEVEL_PRIORITY[level] >= LOG_LEVEL_PRIORITY[this.currentLogLevel];
   }
 
   /**
@@ -34,10 +32,7 @@ export class Logger {
   private output(level: LogLevel, normalized: NormalizedLog) {
     if (!this.shouldLog(level)) return;
 
-    const formatted = this.formatter.format(
-      level,
-      normalized.stack ?? normalized.message,
-    );
+    const formatted = this.formatter.format(level, normalized.stack ?? normalized.message);
     this.writers.forEach((writer) => writer.write(level, formatted));
   }
 

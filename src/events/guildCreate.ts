@@ -5,12 +5,10 @@ import { Logger } from "@/utils/logger";
 export function registerGuildCreateEvent(
   useCase: GuildOnBoardingUseCase,
   client: Client,
-  logger: Logger,
+  logger: Logger
 ) {
   client.on("guildCreate", (guild) => {
-    logger.info(
-      `🚢 The bot has been added to the server: ${guild.name} (${guild.id})`,
-    );
+    logger.info(`🚢 The bot has been added to the server: ${guild.name} (${guild.id})`);
 
     useCase.execute(guild);
   });

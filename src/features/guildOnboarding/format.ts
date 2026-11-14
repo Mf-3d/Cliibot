@@ -5,7 +5,7 @@ export function createWelcomeEmbed() {
     .setTitle("👋 Hello everyone!")
     .setDescription(
       "This bot was created for mf7cli's Discord server.\n" +
-        "There are no features yet. I'm open to requests! 😆",
+        "There are no features yet. I'm open to requests! 😆"
     )
     .setTimestamp()
     .setColor("#2e77ff");

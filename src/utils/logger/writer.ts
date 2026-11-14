@@ -23,10 +23,7 @@ export class ConsoleWriter implements Writer {
         console.log(colored);
       }
     } catch (err) {
-      console.error(
-        styleText(["red", "bold"], "Failed to write to console:"),
-        err,
-      );
+      console.error(styleText(["red", "bold"], "Failed to write to console:"), err);
     }
   }
 
@@ -64,10 +61,7 @@ export class FileWriter implements Writer {
 
       fs.appendFileSync(this.filePath, `${plain}\n`);
     } catch (err) {
-      console.error(
-        styleText(["red", "bold"], "Failed to write to file:"),
-        err,
-      );
+      console.error(styleText(["red", "bold"], "Failed to write to file:"), err);
     }
   }
 }

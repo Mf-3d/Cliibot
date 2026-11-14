@@ -10,7 +10,7 @@ export function registerClientReadyEvent(
   token: string,
   isDev: boolean,
   clientId: string,
-  devGuildId: string | null,
+  devGuildId: string | null
 ) {
   client.once("clientReady", async () => {
     logger.info(`🪵 Logged in as: ${client.user?.tag}`);

@@ -53,9 +53,7 @@ async function setupBot(logger: Logger, config: EnvConfig) {
   const commands = [aboutCommand, pingCommand];
 
   const guildOnboardingService = new GuildOnboardingService(logger);
-  const guildOnBoardingUseCase = new GuildOnBoardingUseCase(
-    guildOnboardingService,
-  );
+  const guildOnBoardingUseCase = new GuildOnBoardingUseCase(guildOnboardingService);
 
   registerClientReadyEvent(
     client,
@@ -64,7 +62,7 @@ async function setupBot(logger: Logger, config: EnvConfig) {
     config.token,
     config.isDev,
     config.clientId,
-    config.devGuildId,
+    config.devGuildId
   );
   registerInteractionEvent(client, logger, commands);
   registerMessageCreateEvent(client, logger);

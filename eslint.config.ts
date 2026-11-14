@@ -29,5 +29,10 @@ export default [
       "prefer-arrow-callback": "error",
     },
   },
-  eslintPluginPrettierRecommended
+  eslintPluginPrettierRecommended,
+  {
+    rules: {
+      "prettier/prettier": "warn",
+    },
+  },
 ];

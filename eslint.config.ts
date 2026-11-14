@@ -1,18 +1,18 @@
 import js from "@eslint/js";
-import tseslint from "typescript-eslint";
 import importPlugin from "eslint-plugin-import";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
+import tseslint from "typescript-eslint";
 
 export default [
   {
-    ignores: ["tests/**/*", "out/**/*"],
+    ignores: ["tests/**/*", "dist/**/*"],
   },
 
   js.configs.recommended,
   ...tseslint.configs.recommended,
 
   {
-    files: ["**/*.ts"],
+    files: ["./src/**/*.ts"],
     plugins: {
       import: importPlugin,
     },

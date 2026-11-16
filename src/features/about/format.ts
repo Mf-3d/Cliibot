@@ -10,13 +10,13 @@ import {
   SeparatorBuilder,
   SeparatorSpacingSize,
 } from "discord.js";
-import { AboutViewModel, BotInfo } from "./types";
+import { AboutViewModel, AboutBotInfo } from "./types";
 
 /**
  * @param info ボット情報
  * @returns
  */
-export function formatBotInfo(info: BotInfo): AboutViewModel {
+export function formatBotInfo(info: AboutBotInfo): AboutViewModel {
   return {
     title: `📄 About ${info.name}`,
     thumbnail: info.avatarUrl,

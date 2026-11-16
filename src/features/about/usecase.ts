@@ -1,14 +1,14 @@
 import type { Client } from "discord.js";
-import type { BotInfo } from "./types";
+import type { AboutBotInfo } from "./types";
 import type { EnvConfig } from "@/config/config";
 
 export class AboutUseCase {
   constructor(
     private readonly client: Client,
-    private readonly config: EnvConfig,
+    private readonly config: EnvConfig
   ) {}
 
-  getBotInfo(): BotInfo {
+  getBotInfo(): AboutBotInfo {
     if (!this.client.user) throw new Error("Client is not ready.");
 
     return {

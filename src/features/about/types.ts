@@ -1,5 +1,5 @@
 // ドメインデータ
-export type BotInfo = {
+export type AboutBotInfo = {
   name: string;
   usertag: string;
   version: string;

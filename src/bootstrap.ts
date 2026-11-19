@@ -1,4 +1,5 @@
-import { createConfig, EnvConfig } from "@/config/config";
+import { appConfig } from "./infrastructure/config/appConfig";
+import { createEnvConfig, EnvConfig } from "./infrastructure/config/envConfig";
 
 import { registerClientReadyEvent } from "@/events/clientReady";
 import { registerGuildCreateEvent } from "@/events/guildCreate";
@@ -14,7 +15,6 @@ import { PingUseCase } from "@/features/ping/usecase";
 import { registerCrashHandler } from "@/infrastructure/crash-handler";
 import { DiscordAdapter } from "@/infrastructure/discord/adapter";
 import { createClient } from "@/infrastructure/discord/client";
-// import { DiscordBotInfoRepository } from "@/infrastructure/discord/discordBotInfoRepository";
 import { createServer } from "@/infrastructure/server";
 import { Logger } from "@/utils/logger";
 
@@ -25,17 +25,17 @@ export async function bootstrap() {
 
   const startTime = new Date();
 
-  const config = createConfig(startTime);
+  const envConfig = createEnvConfig();
 
   logger.info(`Bot setup started at ${startTime.toLocaleString()}`);
 
   registerCrashHandler(logger);
 
-  await setupBot(logger, config);
-  await setupServer(logger, config);
+  await setupBot(logger, envConfig);
+  await setupServer(logger, envConfig);
 }
 
-async function setupBot(logger: Logger, config: EnvConfig) {
+async function setupBot(logger: Logger, envConfig: EnvConfig) {
   logger.info("💭 Setting up the bot...");
 
   const client = createClient();
@@ -44,7 +44,7 @@ async function setupBot(logger: Logger, config: EnvConfig) {
   const discordAdapter = new DiscordAdapter(client);
 
   // コマンド
-  const aboutUseCase = new AboutUseCase(client, config);
+  const aboutUseCase = new AboutUseCase(client, appConfig.bot.name, appConfig.links);
   const aboutCommand = new AboutCommand(aboutUseCase, logger);
 
   const pingUseCase = new PingUseCase();
@@ -59,24 +59,24 @@ async function setupBot(logger: Logger, config: EnvConfig) {
     client,
     logger,
     commands,
-    config.token,
-    config.isDev,
-    config.clientId,
-    config.devGuildId
+    envConfig.bot.token,
+    envConfig.env === "development",
+    envConfig.bot.clientId,
+    envConfig.bot.devGuildId
   );
   registerInteractionEvent(client, logger, commands);
   registerMessageCreateEvent(client, logger);
   registerGuildCreateEvent(guildOnBoardingUseCase, client, logger);
 
-  await client.login(config.token);
+  await client.login(envConfig.bot.token);
 
   logger.info("✔️ The bot setup is complete.");
 }
 
-async function setupServer(logger: Logger, config: EnvConfig) {
+async function setupServer(logger: Logger, envConfig: EnvConfig) {
   logger.info("💭 Setting up the server...");
 
-  await createServer(config.serverPort, logger);
+  await createServer(envConfig.serverPort, logger);
 
   logger.info("✔️ The server setup is complete.");
 }

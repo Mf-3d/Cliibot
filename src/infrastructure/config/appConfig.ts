@@ -1,5 +1,8 @@
 import appConfigJson from "@/../config.json";
 
+/**
+ * アプリケーション固有の設定。
+ */
 export type AppConfig = {
   /**
    * Discordボットの情報。

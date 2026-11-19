@@ -2,13 +2,35 @@ import "dotenv/config";
 
 export type BotEnv = "development" | "production";
 
+/**
+ * 実行環境に依存する設定。
+ */
 export type EnvConfig = {
+  /**
+   * Discordボットの情報。
+   */
   bot: {
+    /**
+     * Discordボットのトークン。
+     */
     token: string;
+    /**
+     * DiscordボットのクライアントID。
+     */
     clientId: string;
+    /**
+     * 開発用サーバーのID。
+     * 本番環境では `null`。
+     */
     devGuildId: string | null;
   };
+  /**
+   * ボットの実行環境。
+   */
   env: BotEnv;
+  /**
+   * サーバーのポート番号。
+   */
   serverPort: number;
 };
 

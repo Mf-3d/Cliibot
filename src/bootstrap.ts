@@ -31,11 +31,11 @@ export async function bootstrap() {
 
   registerCrashHandler(logger);
 
-  await setupBot(logger, envConfig);
+  await setupBot(logger, envConfig, startTime);
   await setupServer(logger, envConfig);
 }
 
-async function setupBot(logger: Logger, envConfig: EnvConfig) {
+async function setupBot(logger: Logger, envConfig: EnvConfig, startTime: Date) {
   logger.info("💭 Setting up the bot...");
 
   const client = createClient();
@@ -48,7 +48,8 @@ async function setupBot(logger: Logger, envConfig: EnvConfig) {
     client,
     appConfig.bot.name,
     appConfig.links,
-    envConfig.env === "development"
+    envConfig.env === "development",
+    startTime
   );
   const aboutCommand = new AboutCommand(aboutUseCase, logger);
 

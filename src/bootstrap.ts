@@ -44,7 +44,12 @@ async function setupBot(logger: Logger, envConfig: EnvConfig) {
   const discordAdapter = new DiscordAdapter(client);
 
   // コマンド
-  const aboutUseCase = new AboutUseCase(client, appConfig.bot.name, appConfig.links);
+  const aboutUseCase = new AboutUseCase(
+    client,
+    appConfig.bot.name,
+    appConfig.links,
+    envConfig.env === "development"
+  );
   const aboutCommand = new AboutCommand(aboutUseCase, logger);
 
   const pingUseCase = new PingUseCase();

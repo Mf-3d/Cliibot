@@ -5,7 +5,7 @@ import { Logger } from "@/utils/logger";
 export class GuildOnboardingService {
   constructor(private readonly logger: Logger) {}
 
-  sendWelcomeMessage(guild: Guild) {
+  async sendWelcomeMessage(guild: Guild) {
     try {
       if (!guild.members.me?.permissions.has("SendMessages")) return;
       if (!guild.members.me?.permissions.has("EmbedLinks")) return;
@@ -17,7 +17,7 @@ export class GuildOnboardingService {
 
       const embed = createWelcomeEmbed();
 
-      channel.send({
+      await channel.send({
         embeds: [embed],
       });
     } catch (err) {

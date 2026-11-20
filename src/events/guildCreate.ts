@@ -7,9 +7,9 @@ export function registerGuildCreateEvent(
   client: Client,
   logger: Logger
 ) {
-  client.on("guildCreate", (guild) => {
+  client.on("guildCreate", async (guild) => {
     logger.info(`🚢 The bot has been added to the server: ${guild.name} (${guild.id})`);
 
-    useCase.execute(guild);
+    await useCase.execute(guild);
   });
 }

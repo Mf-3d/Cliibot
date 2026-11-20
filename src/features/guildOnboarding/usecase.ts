@@ -4,7 +4,7 @@ import { GuildOnboardingService } from "./service";
 export class GuildOnBoardingUseCase {
   constructor(private service: GuildOnboardingService) {}
 
-  execute(guild: Guild) {
-    this.service.sendWelcomeMessage(guild);
+  async execute(guild: Guild) {
+    await this.service.sendWelcomeMessage(guild);
   }
 }

@@ -8,7 +8,7 @@ export function registerMessageCreateEvent(client: Client, logger: Logger) {
     if (message.content === "ping") {
       logger.info(`💬 Message from ${message.author.tag}: ${message.content}`);
       try {
-        message.reply("pong!");
+        await message.reply("pong!");
       } catch (err) {
         logger.error(`Failed to reply message from "${message.author.tag}": ${err}`);
 

@@ -1,6 +1,6 @@
 {
   "name": "cliibot",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "It could be a robot.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -13,7 +13,6 @@ import { GuildOnBoardingUseCase } from "@/features/guildOnboarding/usecase";
 import { PingCommand } from "@/features/ping/command";
 import { PingUseCase } from "@/features/ping/usecase";
 import { registerCrashHandler } from "@/infrastructure/crash-handler";
-import { DiscordAdapter } from "@/infrastructure/discord/adapter";
 import { createClient } from "@/infrastructure/discord/client";
 import { createServer } from "@/infrastructure/server";
 import { Logger } from "@/utils/logger";
@@ -40,9 +39,6 @@ async function setupBot(logger: Logger, envConfig: EnvConfig, startTime: Date) {
 
   const client = createClient();
 
-  // アダプター
-  const discordAdapter = new DiscordAdapter(client);
-
   // コマンド
   const aboutUseCase = new AboutUseCase(
     client,
@@ -54,7 +50,7 @@ async function setupBot(logger: Logger, envConfig: EnvConfig, startTime: Date) {
   const aboutCommand = new AboutCommand(aboutUseCase, logger);
 
   const pingUseCase = new PingUseCase();
-  const pingCommand = new PingCommand(pingUseCase, discordAdapter, logger);
+  const pingCommand = new PingCommand(client, pingUseCase, logger);
 
   const commands = [aboutCommand, pingCommand];
 

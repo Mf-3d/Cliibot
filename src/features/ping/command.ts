@@ -1,7 +1,6 @@
-import { ChatInputCommandInteraction, MessageFlags } from "discord.js";
+import { ChatInputCommandInteraction, Client, MessageFlags } from "discord.js";
 import { PingUseCase } from "./usecase";
 import { Command } from "@/commands/Command";
-import { DiscordAdapter } from "@/infrastructure/discord/adapter";
 import { Logger } from "@/utils/logger";
 
 export class PingCommand implements Command {
@@ -9,15 +8,15 @@ export class PingCommand implements Command {
   description = "Botのpingを表示します";
 
   constructor(
+    private readonly client: Client,
     private readonly useCase: PingUseCase,
-    private readonly discordAdapter: DiscordAdapter,
     private readonly logger: Logger
   ) {}
 
   async execute(interaction: ChatInputCommandInteraction) {
     try {
       const interactionLatency = Date.now() - interaction.createdTimestamp;
-      const wsPing = this.discordAdapter.getWebSocketPing();
+      const wsPing = this.client.ws.ping;
 
       if (interactionLatency > 200) this.logger.warn(`Ping latency high: ${interactionLatency}ms`);
 

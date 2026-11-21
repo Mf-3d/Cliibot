@@ -1,6 +1,6 @@
 import { Client } from "discord.js";
-import { Command } from "@/commands/Command";
-import { Logger } from "@/utils/logger";
+import { Command } from "@/commands/Command.js";
+import { Logger } from "@/utils/logger/index.js";
 
 export function registerInteractionEvent(client: Client, logger: Logger, commands: Command[]) {
   client.on("interactionCreate", async (interaction) => {

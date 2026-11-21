@@ -1,4 +1,4 @@
-import appConfigJson from "@/../config.json";
+import appConfigJson from "@/../config.json" with { type: "json" };
 
 /**
  * アプリケーション固有の設定。

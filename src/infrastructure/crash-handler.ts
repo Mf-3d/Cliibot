@@ -1,4 +1,4 @@
-import type { Logger } from "@/utils/logger";
+import type { Logger } from "@/utils/logger/index.js";
 
 export function registerCrashHandler(logger: Logger) {
   logger.info("💭 Registering the crash handler...");

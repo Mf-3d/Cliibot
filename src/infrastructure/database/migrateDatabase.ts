@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import type { Kysely } from "kysely";
 import { FileMigrationProvider, Migrator } from "kysely/migration";
-import type { Database } from "./schema";
+import type { Database } from "./schema.js";
 
 export function createMigrator(db: Kysely<Database>): Migrator {
   return new Migrator({

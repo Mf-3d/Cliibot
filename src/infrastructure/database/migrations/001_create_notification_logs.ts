@@ -1,7 +1,7 @@
 import { sql, type Kysely } from "kysely";
 import type { Migration } from "kysely/migration";
 
-import type { Database } from "../schema";
+import type { Database } from "../schema.js";
 
 export const migration: Migration = {
   up: async (db: Kysely<Database>) => {

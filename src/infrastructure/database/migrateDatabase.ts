@@ -1,8 +1,12 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import type { Kysely } from "kysely";
 import { FileMigrationProvider, Migrator } from "kysely/migration";
 import type { Database } from "./schema.js";
+
+const currentDirectory = path.dirname(fileURLToPath(import.meta.url));
+const migrationFolder = path.join(currentDirectory, "migrations");
 
 export function createMigrator(db: Kysely<Database>): Migrator {
   return new Migrator({
@@ -10,7 +14,7 @@ export function createMigrator(db: Kysely<Database>): Migrator {
     provider: new FileMigrationProvider({
       fs,
       path,
-      migrationFolder: "./src/infrastructure/database/migrations",
+      migrationFolder,
     }),
   });
 }

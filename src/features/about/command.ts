@@ -1,9 +1,9 @@
 import { ChatInputCommandInteraction, MessageFlags } from "discord.js";
-import { buildComponents } from "./components";
-import { formatBotInfo } from "./format";
-import { AboutUseCase } from "./usecase";
-import { Command } from "@/commands/Command";
-import { Logger } from "@/utils/logger";
+import { buildComponents } from "./components.js";
+import { formatBotInfo } from "./format.js";
+import { AboutUseCase } from "./usecase.js";
+import { Command } from "@/commands/Command.js";
+import { Logger } from "@/utils/logger/index.js";
 
 export class AboutCommand implements Command {
   name = "about";

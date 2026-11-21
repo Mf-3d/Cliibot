@@ -3,11 +3,10 @@
   "version": "0.3.5",
   "description": "It could be a robot.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run check & tsgo -p ./tsconfig.json && tsc-alias -p tsconfig.json",
-    "start": "node ./dist/main",
-    "dev": "npm run check & tsx ./src/main",
-    "check": "tsc",
+    "build": "npm run check && tsgo -p ./tsconfig.json && tsc-alias -p tsconfig.json",
+    "start": "node ./dist/main.js",
+    "dev": "npm run check && tsx ./src/main.ts",
+    "check": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
@@ -52,5 +51,6 @@
   },
   "allowScripts": {
     "esbuild@0.28.2": true
-  }
+  },
+  "type": "module"
 }

@@ -1,5 +1,5 @@
 import { Guild } from "discord.js";
-import { GuildOnboardingService } from "./service";
+import { GuildOnboardingService } from "./service.js";
 
 export class GuildOnBoardingUseCase {
   constructor(private service: GuildOnboardingService) {}

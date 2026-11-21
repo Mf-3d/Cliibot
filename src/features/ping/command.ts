@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, Client, MessageFlags } from "discord.js";
-import { PingUseCase } from "./usecase";
-import { Command } from "@/commands/Command";
-import { Logger } from "@/utils/logger";
+import { PingUseCase } from "./usecase.js";
+import { Command } from "@/commands/Command.js";
+import { Logger } from "@/utils/logger/index.js";
 
 export class PingCommand implements Command {
   name = "ping";

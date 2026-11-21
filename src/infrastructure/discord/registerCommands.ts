@@ -1,5 +1,5 @@
 import { REST, Routes } from "discord.js";
-import { Command } from "@/commands/Command";
+import { Command } from "@/commands/Command.js";
 
 export async function registerCommands(
   commands: Command[],

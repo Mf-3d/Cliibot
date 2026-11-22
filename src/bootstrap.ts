@@ -1,4 +1,5 @@
 import type { Server } from "node:http";
+import type { Client } from "discord.js";
 import type { Kysely } from "kysely";
 
 import { appConfig } from "./infrastructure/config/appConfig.js";
@@ -21,8 +22,8 @@ import { PingUseCase } from "@/features/ping/usecase.js";
 import { registerCrashHandler } from "@/infrastructure/crash-handler.js";
 import { createClient } from "@/infrastructure/discord/client.js";
 import { createServer } from "@/infrastructure/server.js";
+import { registerShutdownHandler } from "@/infrastructure/shutdown-handler.js";
 import { Logger } from "@/utils/logger/index.js";
-import { Client } from "discord.js";
 
 export async function bootstrap() {
   // ロガーを生成
@@ -40,6 +41,10 @@ export async function bootstrap() {
   const db = await setupDatabase(envConfig.databaseUrl, logger);
   const client = await setupBot(logger, envConfig, startTime, db);
   const server = await setupServer(logger, envConfig);
+
+  registerShutdownHandler(client, server, db, logger);
+
+  logger.info(`Bot setup complete!`);
 }
 
 async function setupBot(

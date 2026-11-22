@@ -1,4 +1,6 @@
+import type { Server } from "node:http";
 import { Logger } from "@mf-3d/logger";
+import type { Client } from "discord.js";
 import type { Kysely } from "kysely";
 
 import { appConfig } from "./infrastructure/config/appConfig.js";
@@ -21,6 +23,8 @@ import { PingUseCase } from "@/features/ping/usecase.js";
 import { registerCrashHandler } from "@/infrastructure/crash-handler.js";
 import { createClient } from "@/infrastructure/discord/client.js";
 import { createServer } from "@/infrastructure/server.js";
+import { registerShutdownHandler } from "@/infrastructure/shutdown-handler.js";
+import { cleanupStartupResources } from "@/infrastructure/startup-cleanup.js";
 
 export async function bootstrap() {
   // ロガーを生成

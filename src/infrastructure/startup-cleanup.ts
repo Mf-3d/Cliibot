@@ -1,8 +1,8 @@
 import type { Server } from "node:http";
+import type { Logger } from "@mf-3d/logger";
 import type { Client } from "discord.js";
 import type { Kysely } from "kysely";
 import type { Database } from "./database/schema.js";
-import type { Logger } from "@/utils/logger/index.js";
 
 export async function cleanupStartupResources(
   client: Client | undefined,

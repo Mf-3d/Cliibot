@@ -32,6 +32,10 @@ export type EnvConfig = {
    * サーバーのポート番号。
    */
   serverPort: number;
+  /**
+   * ボットのデータベースのURL。
+   */
+  databaseUrl: string;
 };
 
 function requireEnv(name: string): string {
@@ -73,5 +77,6 @@ export function createEnvConfig(): EnvConfig {
     },
     env,
     serverPort: parseServerPort(requireEnv("SERVER_PORT")),
+    databaseUrl: requireEnv("DATABASE_URL"),
   };
 }

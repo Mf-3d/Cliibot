@@ -1,10 +1,10 @@
 import type { Kysely } from "kysely";
 
 import { appConfig } from "./infrastructure/config/appConfig.js";
-import { createEnvConfig, EnvConfig } from "./infrastructure/config/envConfig.js";
+import { createEnvConfig, type EnvConfig } from "./infrastructure/config/envConfig.js";
 import { createDatabase } from "./infrastructure/database/createDatabase.js";
 import { createMigrator, migrateDatabase } from "./infrastructure/database/migrateDatabase.js";
-import { Database } from "./infrastructure/database/schema.js";
+import type { Database } from "./infrastructure/database/schema.js";
 
 import { registerClientReadyEvent } from "@/events/clientReady.js";
 import { registerGuildCreateEvent } from "@/events/guildCreate.js";

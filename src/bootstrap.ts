@@ -3,10 +3,10 @@ import type { Client } from "discord.js";
 import type { Kysely } from "kysely";
 
 import { appConfig } from "./infrastructure/config/appConfig.js";
-import { createEnvConfig, EnvConfig } from "./infrastructure/config/envConfig.js";
+import { createEnvConfig, type EnvConfig } from "./infrastructure/config/envConfig.js";
 import { createDatabase } from "./infrastructure/database/createDatabase.js";
 import { createMigrator, migrateDatabase } from "./infrastructure/database/migrateDatabase.js";
-import { Database } from "./infrastructure/database/schema.js";
+import type { Database } from "./infrastructure/database/schema.js";
 
 import { registerClientReadyEvent } from "@/events/clientReady.js";
 import { registerGuildCreateEvent } from "@/events/guildCreate.js";
@@ -23,6 +23,7 @@ import { registerCrashHandler } from "@/infrastructure/crash-handler.js";
 import { createClient } from "@/infrastructure/discord/client.js";
 import { createServer } from "@/infrastructure/server.js";
 import { registerShutdownHandler } from "@/infrastructure/shutdown-handler.js";
+import { cleanupStartupResources } from "@/infrastructure/startup-cleanup.js";
 import { Logger } from "@/utils/logger/index.js";
 
 export async function bootstrap() {
@@ -38,11 +39,23 @@ export async function bootstrap() {
 
   registerCrashHandler(logger);
 
-  const db = await setupDatabase(envConfig.databaseUrl, logger);
-  const client = await setupBot(logger, envConfig, startTime, db);
-  const server = await setupServer(logger, envConfig);
+  let db: Kysely<Database> | undefined;
+  let client: Client | undefined;
+  let server: Server | undefined;
 
-  registerShutdownHandler(client, server, db, logger);
+  try {
+    db = await setupDatabase(envConfig.databaseUrl, logger);
+    client = await setupBot(logger, envConfig, startTime, db);
+    server = await setupServer(logger, envConfig);
+
+    registerShutdownHandler(client, server, db, logger);
+  } catch (error) {
+    logger.error("Bot setup failed:", String(error));
+
+    await cleanupStartupResources(client, server, db, logger);
+
+    process.exitCode = 1;
+  }
 
   logger.info(`Bot setup complete!`);
 }
@@ -88,9 +101,19 @@ async function setupBot(
   registerMessageCreateEvent(client, logger);
   registerGuildCreateEvent(guildOnBoardingUseCase, client, logger);
 
-  await client.login(envConfig.bot.token);
+  try {
+    await client.login(envConfig.bot.token);
 
-  logger.info("✔️ The bot setup is complete.");
+    logger.info("The bot setup is complete.");
+  } catch (error) {
+    try {
+      await client.destroy();
+    } catch (cleanupError) {
+      logger.error("Failed to destroy the Discord client:", String(cleanupError));
+    }
+
+    throw error;
+  }
 
   return client;
 }

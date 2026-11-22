@@ -9,7 +9,7 @@ import {
   SeparatorBuilder,
   SeparatorSpacingSize,
 } from "discord.js";
-import { AboutViewModel } from "./types.js";
+import type { AboutViewModel } from "./types.js";
 
 /**
  * @param view 表示用にフォーマットされたボットの情報

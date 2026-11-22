@@ -4,7 +4,7 @@ import { styleText } from "node:util";
 import chalk from "chalk";
 import stripAnsi from "strip-ansi";
 
-import { LogLevel } from "./levels.js";
+import type { LogLevel } from "./levels.js";
 
 export interface Writer {
   write(level: LogLevel, text: string): void;

@@ -100,6 +100,8 @@ async function setupDatabase(connectionString: string, logger: Logger): Promise<
 
   try {
     await migrateDatabase(migrator);
+
+    logger.info("✔️ The database setup is complete.");
     return database;
   } catch (error) {
     logger.error("Database migration failed", String(error));

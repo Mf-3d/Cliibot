@@ -1,4 +1,6 @@
+import type { Server } from "node:http";
 import { Logger } from "@mf-3d/logger";
+import type { Client } from "discord.js";
 import type { Kysely } from "kysely";
 
 import { appConfig } from "./infrastructure/config/appConfig.js";
@@ -21,6 +23,8 @@ import { PingUseCase } from "@/features/ping/usecase.js";
 import { registerCrashHandler } from "@/infrastructure/crash-handler.js";
 import { createClient } from "@/infrastructure/discord/client.js";
 import { createServer } from "@/infrastructure/server.js";
+import { registerShutdownHandler } from "@/infrastructure/shutdown-handler.js";
+import { cleanupStartupResources } from "@/infrastructure/startup-cleanup.js";
 
 export async function bootstrap() {
   // ロガーを生成
@@ -35,9 +39,27 @@ export async function bootstrap() {
 
   registerCrashHandler(logger);
 
-  const db = await setupDatabase(envConfig.databaseUrl, logger);
-  await setupBot(logger, envConfig, startTime, db);
-  await setupServer(logger, envConfig);
+  let db: Kysely<Database> | undefined;
+  let client: Client | undefined;
+  let server: Server | undefined;
+
+  try {
+    db = await setupDatabase(envConfig.databaseUrl, logger);
+    client = await setupBot(logger, envConfig, startTime, db);
+    server = await setupServer(logger, envConfig);
+
+    registerShutdownHandler(client, server, db, logger);
+
+    logger.info(`Bot setup complete!`);
+  } catch (error) {
+    logger.error("Bot setup failed:", String(error));
+
+    await cleanupStartupResources(client, server, db, logger);
+
+    logger.error(`Bot setup failed!`);
+
+    process.exitCode = 1;
+  }
 }
 
 async function setupBot(
@@ -45,7 +67,7 @@ async function setupBot(
   envConfig: EnvConfig,
   startTime: Date,
   database: Kysely<Database>
-) {
+): Promise<Client> {
   logger.info("💭 Setting up the bot...");
 
   const client = createClient();
@@ -81,17 +103,31 @@ async function setupBot(
   registerMessageCreateEvent(client, logger);
   registerGuildCreateEvent(guildOnBoardingUseCase, client, logger);
 
-  await client.login(envConfig.bot.token);
+  try {
+    await client.login(envConfig.bot.token);
 
-  logger.info("✔️ The bot setup is complete.");
+    logger.info("The bot setup is complete.");
+  } catch (error) {
+    try {
+      await client.destroy();
+    } catch (cleanupError) {
+      logger.error("Failed to destroy the Discord client:", String(cleanupError));
+    }
+
+    throw error;
+  }
+
+  return client;
 }
 
-async function setupServer(logger: Logger, envConfig: EnvConfig) {
+async function setupServer(logger: Logger, envConfig: EnvConfig): Promise<Server> {
   logger.info("💭 Setting up the server...");
 
-  await createServer(envConfig.serverPort, logger);
+  const server = await createServer(envConfig.serverPort, logger);
 
   logger.info("✔️ The server setup is complete.");
+
+  return server;
 }
 
 async function setupDatabase(connectionString: string, logger: Logger): Promise<Kysely<Database>> {

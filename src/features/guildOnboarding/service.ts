@@ -1,6 +1,6 @@
+import type { Logger } from "@mf-3d/logger";
 import type { Guild } from "discord.js";
 import { createWelcomeEmbed } from "./format.js";
-import type { Logger } from "@/utils/logger/index.js";
 
 export class GuildOnboardingService {
   constructor(private readonly logger: Logger) {}

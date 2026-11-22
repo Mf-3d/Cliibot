@@ -1,4 +1,4 @@
-import type { Logger } from "@/utils/logger/index.js";
+import type { Logger } from "@mf-3d/logger";
 
 export function registerCrashHandler(logger: Logger) {
   logger.info("💭 Registering the crash handler...");

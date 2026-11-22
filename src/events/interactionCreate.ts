@@ -1,6 +1,6 @@
+import type { Logger } from "@mf-3d/logger";
 import type { Client } from "discord.js";
 import type { Command } from "@/commands/Command.js";
-import type { Logger } from "@/utils/logger/index.js";
 
 export function registerInteractionEvent(client: Client, logger: Logger, commands: Command[]) {
   client.on("interactionCreate", async (interaction) => {

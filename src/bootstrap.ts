@@ -1,5 +1,10 @@
+import type { Kysely } from "kysely";
+
 import { appConfig } from "./infrastructure/config/appConfig.js";
 import { createEnvConfig, EnvConfig } from "./infrastructure/config/envConfig.js";
+import { createDatabase } from "./infrastructure/database/createDatabase.js";
+import { createMigrator, migrateDatabase } from "./infrastructure/database/migrateDatabase.js";
+import { Database } from "./infrastructure/database/schema.js";
 
 import { registerClientReadyEvent } from "@/events/clientReady.js";
 import { registerGuildCreateEvent } from "@/events/guildCreate.js";
@@ -30,11 +35,17 @@ export async function bootstrap() {
 
   registerCrashHandler(logger);
 
-  await setupBot(logger, envConfig, startTime);
+  const db = await setupDatabase(envConfig.databaseUrl, logger);
+  await setupBot(logger, envConfig, startTime, db);
   await setupServer(logger, envConfig);
 }
 
-async function setupBot(logger: Logger, envConfig: EnvConfig, startTime: Date) {
+async function setupBot(
+  logger: Logger,
+  envConfig: EnvConfig,
+  startTime: Date,
+  database: Kysely<Database>
+) {
   logger.info("💭 Setting up the bot...");
 
   const client = createClient();
@@ -81,4 +92,24 @@ async function setupServer(logger: Logger, envConfig: EnvConfig) {
   await createServer(envConfig.serverPort, logger);
 
   logger.info("✔️ The server setup is complete.");
+}
+
+async function setupDatabase(connectionString: string, logger: Logger): Promise<Kysely<Database>> {
+  const database = createDatabase(connectionString);
+  const migrator = createMigrator(database);
+
+  try {
+    await migrateDatabase(migrator);
+    return database;
+  } catch (error) {
+    logger.error("Database migration failed", String(error));
+
+    try {
+      await database.destroy();
+    } catch (cleanupError) {
+      logger.error("Failed to close database connection", String(cleanupError));
+    }
+
+    throw error;
+  }
 }

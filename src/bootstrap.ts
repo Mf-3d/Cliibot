@@ -1,5 +1,4 @@
-import type { Server } from "node:http";
-import type { Client } from "discord.js";
+import { Logger } from "@mf-3d/logger";
 import type { Kysely } from "kysely";
 
 import { appConfig } from "./infrastructure/config/appConfig.js";
@@ -22,9 +21,6 @@ import { PingUseCase } from "@/features/ping/usecase.js";
 import { registerCrashHandler } from "@/infrastructure/crash-handler.js";
 import { createClient } from "@/infrastructure/discord/client.js";
 import { createServer } from "@/infrastructure/server.js";
-import { registerShutdownHandler } from "@/infrastructure/shutdown-handler.js";
-import { cleanupStartupResources } from "@/infrastructure/startup-cleanup.js";
-import { Logger } from "@/utils/logger/index.js";
 
 export async function bootstrap() {
   // ロガーを生成
@@ -134,6 +130,8 @@ async function setupDatabase(connectionString: string, logger: Logger): Promise<
 
   try {
     await migrateDatabase(migrator);
+
+    logger.info("✔️ The database setup is complete.");
     return database;
   } catch (error) {
     logger.error("Database migration failed", String(error));

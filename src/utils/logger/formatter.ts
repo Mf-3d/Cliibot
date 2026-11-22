@@ -1,4 +1,4 @@
-import { LogLevel } from "./levels.js";
+import type { LogLevel } from "./levels.js";
 
 export class Formatter {
   format(level: LogLevel, message: string): string {

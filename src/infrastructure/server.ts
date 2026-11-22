@@ -1,7 +1,6 @@
 import type { Server } from "node:http";
+import type { Logger } from "@mf-3d/logger";
 import express from "express";
-
-import type { Logger } from "@/utils/logger/index.js";
 
 export function createServer(port: number, logger: Logger): Promise<Server> {
   const app = express();

@@ -1,5 +1,5 @@
-import { Client } from "discord.js";
-import { Logger } from "@/utils/logger/index.js";
+import type { Logger } from "@mf-3d/logger";
+import type { Client } from "discord.js";
 
 export function registerMessageCreateEvent(client: Client, logger: Logger) {
   client.on("messageCreate", async (message) => {

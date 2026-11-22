@@ -1,6 +1,6 @@
-import { Client } from "discord.js";
-import { GuildOnBoardingUseCase } from "@/features/guildOnboarding/usecase.js";
-import { Logger } from "@/utils/logger/index.js";
+import type { Logger } from "@mf-3d/logger";
+import type { Client } from "discord.js";
+import type { GuildOnBoardingUseCase } from "@/features/guildOnboarding/usecase.js";
 
 export function registerGuildCreateEvent(
   useCase: GuildOnBoardingUseCase,

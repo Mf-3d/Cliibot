@@ -1,8 +1,8 @@
 import { styleText } from "node:util";
 import { Formatter } from "./formatter.js";
-import { LOG_LEVEL_PRIORITY, LogLevel } from "./levels.js";
-import { NormalizedLog, Normalizer } from "./normalizer.js";
-import { Writer, ConsoleWriter, FileWriter } from "./writer.js";
+import { LOG_LEVEL_PRIORITY, type LogLevel } from "./levels.js";
+import { type NormalizedLog, Normalizer } from "./normalizer.js";
+import { type Writer, ConsoleWriter, FileWriter } from "./writer.js";
 
 export class Logger {
   private currentLogLevel: LogLevel = "info";

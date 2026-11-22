@@ -49,15 +49,17 @@ export async function bootstrap() {
     server = await setupServer(logger, envConfig);
 
     registerShutdownHandler(client, server, db, logger);
+
+    logger.info(`Bot setup complete!`);
   } catch (error) {
     logger.error("Bot setup failed:", String(error));
 
     await cleanupStartupResources(client, server, db, logger);
 
+    logger.error(`Bot setup failed!`);
+
     process.exitCode = 1;
   }
-
-  logger.info(`Bot setup complete!`);
 }
 
 async function setupBot(

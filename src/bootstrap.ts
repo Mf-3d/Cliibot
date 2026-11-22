@@ -1,3 +1,4 @@
+import type { Server } from "node:http";
 import type { Kysely } from "kysely";
 
 import { appConfig } from "./infrastructure/config/appConfig.js";
@@ -21,6 +22,7 @@ import { registerCrashHandler } from "@/infrastructure/crash-handler.js";
 import { createClient } from "@/infrastructure/discord/client.js";
 import { createServer } from "@/infrastructure/server.js";
 import { Logger } from "@/utils/logger/index.js";
+import { Client } from "discord.js";
 
 export async function bootstrap() {
   // ロガーを生成
@@ -36,8 +38,8 @@ export async function bootstrap() {
   registerCrashHandler(logger);
 
   const db = await setupDatabase(envConfig.databaseUrl, logger);
-  await setupBot(logger, envConfig, startTime, db);
-  await setupServer(logger, envConfig);
+  const client = await setupBot(logger, envConfig, startTime, db);
+  const server = await setupServer(logger, envConfig);
 }
 
 async function setupBot(
@@ -45,7 +47,7 @@ async function setupBot(
   envConfig: EnvConfig,
   startTime: Date,
   database: Kysely<Database>
-) {
+): Promise<Client> {
   logger.info("💭 Setting up the bot...");
 
   const client = createClient();
@@ -84,14 +86,18 @@ async function setupBot(
   await client.login(envConfig.bot.token);
 
   logger.info("✔️ The bot setup is complete.");
+
+  return client;
 }
 
-async function setupServer(logger: Logger, envConfig: EnvConfig) {
+async function setupServer(logger: Logger, envConfig: EnvConfig): Promise<Server> {
   logger.info("💭 Setting up the server...");
 
-  await createServer(envConfig.serverPort, logger);
+  const server = await createServer(envConfig.serverPort, logger);
 
   logger.info("✔️ The server setup is complete.");
+
+  return server;
 }
 
 async function setupDatabase(connectionString: string, logger: Logger): Promise<Kysely<Database>> {

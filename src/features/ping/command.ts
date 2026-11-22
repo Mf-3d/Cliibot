@@ -1,7 +1,7 @@
+import type { Logger } from "@mf-3d/logger";
 import { type ChatInputCommandInteraction, type Client, MessageFlags } from "discord.js";
 import type { PingUseCase } from "./usecase.js";
 import type { Command } from "@/commands/Command.js";
-import type { Logger } from "@/utils/logger/index.js";
 
 export class PingCommand implements Command {
   name = "ping";

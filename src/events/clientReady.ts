@@ -1,7 +1,7 @@
+import type { Logger } from "@mf-3d/logger";
 import type { Client } from "discord.js";
 import type { Command } from "@/commands/Command.js";
 import { registerCommands } from "@/infrastructure/discord/registerCommands.js";
-import type { Logger } from "@/utils/logger/index.js";
 
 export function registerClientReadyEvent(
   client: Client,

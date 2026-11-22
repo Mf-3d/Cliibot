@@ -19,7 +19,8 @@
     "express": "^5.3.0",
     "kysely": "^0.29.9",
     "pg": "^8.23.1",
-    "strip-ansi": "^7.2.0"
+    "strip-ansi": "^7.2.0",
+    "@mf-3d/logger": "github:mf-3d/logger#v0.3.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
@@ -53,7 +54,8 @@
     "node": ">=22.0.0"
   },
   "allowScripts": {
-    "esbuild@0.28.2": true
+    "esbuild@0.28.2": true,
+    "github:mf-3d/logger#3d7000b65921e729dd93c9f442236f91d8ca3c1b": true
   },
   "type": "module"
 }

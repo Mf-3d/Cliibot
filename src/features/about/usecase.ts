@@ -1,7 +1,7 @@
 import type { Client } from "discord.js";
 import packageJson from "../../../package.json" with { type: "json" };
 import type { AboutBotInfo } from "./types.js";
-import { AppConfig } from "@/infrastructure/config/appConfig.js";
+import type { AppConfig } from "@/infrastructure/config/appConfig.js";
 
 export class AboutUseCase {
   constructor(

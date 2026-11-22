@@ -23,6 +23,13 @@ export default [
           alphabetize: { order: "asc" },
         },
       ],
+      "@typescript-eslint/consistent-type-imports": [
+        "error", // 'warn' でも可
+        {
+          prefer: "type-imports", // 型のみ使う場合は import type を強制
+          fixStyle: "inline-type-imports", // import { type Foo } 形式（デフォルトは 'separate-type-imports'）
+        },
+      ],
       "prefer-arrow-callback": "error",
     },
   },

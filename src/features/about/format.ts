@@ -10,7 +10,7 @@ import {
   SeparatorBuilder,
   SeparatorSpacingSize,
 } from "discord.js";
-import { AboutViewModel, AboutBotInfo } from "./types.js";
+import type { AboutViewModel, AboutBotInfo } from "./types.js";
 
 /**
  * @param info ボット情報

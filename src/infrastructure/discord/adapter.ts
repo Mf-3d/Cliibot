@@ -1,4 +1,4 @@
-import { Client } from "discord.js";
+import type { Client } from "discord.js";
 
 export class DiscordAdapter {
   private readonly client: Client;

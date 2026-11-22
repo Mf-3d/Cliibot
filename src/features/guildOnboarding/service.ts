@@ -1,6 +1,6 @@
-import { Guild } from "discord.js";
+import type { Guild } from "discord.js";
 import { createWelcomeEmbed } from "./format.js";
-import { Logger } from "@/utils/logger/index.js";
+import type { Logger } from "@/utils/logger/index.js";
 
 export class GuildOnboardingService {
   constructor(private readonly logger: Logger) {}

@@ -10,14 +10,6 @@ export async function cleanupStartupResources(
   db: Kysely<Database> | undefined,
   logger: Logger
 ): Promise<void> {
-  if (client) {
-    try {
-      await client.destroy();
-    } catch (error) {
-      logger.error("Failed to destroy the Discord client:", String(error));
-    }
-  }
-
   if (server) {
     try {
       await new Promise<void>((resolve, reject) => {
@@ -32,6 +24,14 @@ export async function cleanupStartupResources(
       });
     } catch (error) {
       logger.error("Failed to close HTTP server:", String(error));
+    }
+  }
+
+  if (client) {
+    try {
+      await client.destroy();
+    } catch (error) {
+      logger.error("Failed to destroy the Discord client:", String(error));
     }
   }
 

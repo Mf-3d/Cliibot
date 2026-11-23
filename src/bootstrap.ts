@@ -135,7 +135,7 @@ async function setupDatabase(connectionString: string, logger: Logger): Promise<
   const migrator = createMigrator(database);
 
   try {
-    await migrateDatabase(migrator);
+    await migrateDatabase(migrator, logger);
 
     logger.info("✔️ The database setup is complete.");
     return database;

@@ -1,10 +1,12 @@
+import type { Generated } from "kysely";
+
 type AnniversaryNotificationLogTable = {
-  anniversary_id: number;
+  anniversary_id: string;
   year: number;
-  status: string;
-  attempt_count: number;
-  created_at: Date;
-  updated_at: Date;
+  status: Generated<"pending" | "sent" | "failed">;
+  attempt_count: Generated<number>;
+  created_at: Generated<Date>;
+  updated_at: Generated<Date>;
 };
 
 export type Database = {

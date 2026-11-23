@@ -5,7 +5,7 @@ import type { Kysely } from "kysely";
 
 import type { Database } from "./database/schema.js";
 
-export async function registerShutdownHandler(
+export function registerShutdownHandler(
   client: Client,
   server: Server,
   db: Kysely<Database>,

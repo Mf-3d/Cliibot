@@ -2,7 +2,7 @@ import type { Insertable, Kysely, Selectable } from "kysely";
 import type { AnniversaryNotificationLog } from "./model.js";
 import type { Database } from "@/infrastructure/database/schema.js";
 
-export interface AnniversaryNotificationLogRepository {
+export interface AnniversaryNotificationLogRepositoryInterface {
   findByAnniversaryIdAndYear(
     anniversaryId: string,
     year: number
@@ -23,7 +23,7 @@ export interface AnniversaryNotificationLogRepository {
   ): Insertable<Database["anniversary_notification_logs"]>;
 }
 
-export class AnniversaryNotificationLogRepositoryImpl implements AnniversaryNotificationLogRepository {
+export class AnniversaryNotificationLogRepository implements AnniversaryNotificationLogRepositoryInterface {
   constructor(private readonly db: Kysely<Database>) {}
 
   async findByAnniversaryIdAndYear(

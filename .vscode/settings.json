@@ -9,5 +9,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.formatOnSave": true,
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "yaml.schemas": {
+    "./schemas/anniversaries.schema.json": ["data/anniversaries.yml", "src/test/fixtures/anniversaries.yml"]
+  }
 }

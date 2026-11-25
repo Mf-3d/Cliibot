@@ -1,0 +1,15 @@
+anniversaries:
+  - id: test1
+    name: テスト１
+    date:
+      month: 2
+      day: 7
+    guild-id: "123456789012345678"
+    channel-id: "987654321098765432"
+  - id: test2
+    name: テスト２
+    date:
+      month: 2
+      day: 8
+    guild-id: "123456789012345678"
+    channel-id: "987654321098765432"

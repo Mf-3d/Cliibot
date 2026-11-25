@@ -1,0 +1,9 @@
+anniversaries:
+  - id: "test"
+    name: "テスト"
+    date:
+      month: 2
+      day: 7
+    guild-id: "123456789012345678"
+    channel-id: "987654321012345678"
+    invalid: [unclosed

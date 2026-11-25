@@ -1,12 +1,12 @@
 import type { Logger } from "@mf-3d/logger";
 import type { Kysely, Selectable } from "kysely";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { createTestDatabase } from "../../../../tests/helpers/createTestDatabase.js";
 import {
   createMigrator,
   migrateDatabase,
 } from "../../../infrastructure/database/migrateDatabase.js";
 import type { Database } from "../../../infrastructure/database/schema.js";
-import { createTestDatabase } from "../../../test/helpers/createTestDatabase.js";
 import type { AnniversaryNotificationLog } from "./model.js";
 import { AnniversaryNotificationLogRepository } from "./repository.js";
 

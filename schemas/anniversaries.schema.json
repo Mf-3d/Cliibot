@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Anniversary Configuration",
+  "type": "object",
+  "properties": {
+    "anniversaries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "記念日のID、一意の値。",
+            "examples": [
+              "the-start-of-bot-development"
+            ],
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "記念日の名前。",
+            "examples": [
+              "ボット開発の開始記念日"
+            ],
+            "minLength": 1
+          },
+          "date": {
+            "type": "object",
+            "description": "記念日を通知する日付。",
+            "properties": {
+              "month": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 12,
+                "examples": [2]
+              },
+              "day": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 31,
+                "examples": [7]
+              }
+            },
+            "required": ["month", "day"],
+            "additionalProperties": false
+          },
+          "guild-id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "channel-id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "date",
+          "guild-id",
+          "channel-id"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["anniversaries"],
+  "additionalProperties": false
+}

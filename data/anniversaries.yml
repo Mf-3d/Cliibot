@@ -1,0 +1,8 @@
+anniversaries:
+  - id: "the-start-of-bot-development"
+    name: "ボット開発の開始記念日"
+    date:
+      month: 2
+      day: 7
+    guild-id: "1369304504385798284"
+    channel-id: "1388020647850147973"

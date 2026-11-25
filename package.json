@@ -7,6 +7,7 @@
     "start": "node ./dist/main.js",
     "dev": "npm run check && tsx ./src/main.ts",
     "check": "tsgo --noEmit",
+    "check:test": "tsgo --project tsconfig.test.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
